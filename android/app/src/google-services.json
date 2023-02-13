@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "156338805338",
+    "project_id": "yummealprep-adb3b",
+    "storage_bucket": "yummealprep-adb3b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:156338805338:android:20857557e31d3a53ef1663",
+        "android_client_info": {
+          "package_name": "com.asptechinc.yummealprep"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "156338805338-0dqbnkscf1re1kq92s0kor2bsvde1sge.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.asptechinc.yummealprep",
+            "certificate_hash": "a2339773792959072f2921091533c10641f65b79"
+          }
+        },
+        {
+          "client_id": "156338805338-s8ra68prtbq4mq3bqac41rijrir4290j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaePXVv8R1bmqhz0BCvPJBek3_DPUcrW4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "156338805338-s8ra68prtbq4mq3bqac41rijrir4290j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

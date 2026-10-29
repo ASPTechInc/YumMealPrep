@@ -1,0 +1,102 @@
+{
+  "format": "yummealprep-backup",
+  "version": 1,
+  "sampleDataVersion": 1,
+  "meals": {
+    "EydGfAfwAR7vHM3yXmJ4": {
+      "name": "Fish & Chips",
+      "type": "lunch",
+      "description": "Enjoy this delicious meal",
+      "drink": "Juice",
+      "sideDishes": [],
+      "image": "assets/images/meals/fish-and-chips.webp",
+      "nutritionFactImages": [],
+      "isFavourite": false
+    },
+    "i9T9zZ2nxAN7gfz2iSLE": {
+      "name": "Pancake & Scrambled Eggs",
+      "type": "breakfast",
+      "description": "Pancake with scrambled eggs is one of the most popular of foods worldwide. It is easy, quick and tastes delicious.",
+      "drink": "Chocolate Tea",
+      "sideDishes": [
+        "Toast"
+      ],
+      "image": "assets/images/meals/pancake-and-scrambled-eggs.webp",
+      "nutritionFactImages": [],
+      "isFavourite": false
+    }
+  },
+  "recipes": {
+    "XKyicoZAijVI7JWKsp2h": {
+      "name": "Banana Smoothie",
+      "type": "smoothies",
+      "description": "Bananas are great choices for making homemade smoothies. Use them as a base and add different fruits for a quick and easy blended drink.",
+      "ingredients": [
+        "1 banana",
+        "1/2 orange, peeled and quartered",
+        "1/3 cup Greek yogurt",
+        "1/4 cup water or milk (dairy or non-dairy)",
+        "1 to 2 teaspoons honey, optional"
+      ],
+      "instructions": [
+        "Roughly chop banana and orange quarters then add to a blender",
+        "Top with yogurt and the water (or milk)",
+        "Turn blender on and blend until creamy and smooth",
+        "Taste then adjust with honey if needed"
+      ],
+      "preparationMinutes": 5,
+      "cookingMinutes": 0,
+      "servings": 1,
+      "image": "assets/images/recipes/banana-smoothie.webp",
+      "isSideDish": false,
+      "isFavourite": false
+    },
+    "NoEOas8szH1lYjD696rs": {
+      "name": "Lasagne",
+      "type": "lunch",
+      "description": "Lasagne are a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.",
+      "ingredients": [
+        "1 tablespoon olive oil [Meat Sauce]",
+        "4 tbs onion powder [Meat Sauce]",
+        "1 carrot, finely diced [Meat Sauce]",
+        "4 tbs garlic powder [Meat Sauce]",
+        "24 ounces (700 grams) mince meat [Meat Sauce]",
+        "14 ounces (410 grams) crushed tomatoes [Meat Sauce]",
+        "3 heaped tablespoons tomato paste [Meat Sauce]",
+        "1/2 teaspoon sugar [Meat Sauce]",
+        "3/4 tsp salt season to your taste [Meat Sauce]",
+        "4 tablespoons butter [White Sauce (Béchamel)]",
+        "1/4 cup flour, all purpose or plain [White Sauce (Béchamel)]",
+        "3 1/2 cups milk [White Sauce (Béchamel)]",
+        "1 cup shredded Cheddar cheese [White Sauce (Béchamel)]",
+        "13 ounces (375 grams) lasagne sheets [Lasagne]",
+        "17 ounces (500 grams) Cheddar cheese, shredded [Lasagne]",
+        "2 tablespoons finely chopped fresh parsley [Lasagne]",
+        "Thyme [Lasagne]"
+      ],
+      "instructions": [
+        "Heat oil in a large pot over medium heat, then add in the onion powder and carrots and cook for 8-10 minutes, or until softened. Add in the garlic powder and sauté for about 1 minute, until fragrant. [Meat Sauce]",
+        "Add mince meat and cook while breaking it up with the end of your spoon, until browned. [Meat Sauce]",
+        "Pour in the crushed tomatoes, tomato paste and dried parsley. Mix well to combine and bring to a gentle simmer. [Meat Sauce]",
+        "Season with desired amount of salt and sugar if needed. Cover and cook for about 20-30 minutes, occasionally mixing, until the sauce has thickened slightly and meat is tender. [Meat Sauce]",
+        "Adjust salt to your taste. [Meat Sauce]",
+        "In a large pot, melt butter over medium heat. Remove from hot plate; add the flour and whisk for about 30 seconds, or until well blended. [Cheddar White Sauce]",
+        "Place pot back onto stove, reduce heat down to low and slowly whisk in 1 cup of the milk until well combined. [Cheddar White Sauce]",
+        "Once well blended, add the remaining milk in 1 cup increments, mixing well after each addition, until all the milk is used and sauce is free from lumps. If the sauce is too thick, add a little more milk until it turns into a nice and creamy consistency. [Cheddar White Sauce]",
+        "Increase heat to medium and continue cooking sauce while stirring occasionally until it thickens (about 6-7 minutes) and coats the back of your wooden spoon. [Cheddar White Sauce]",
+        "Add in the cheddar cheese and remove from heat. Season with salt and mix until the cheese is melted through. [Cheddar White Sauce]",
+        "Preheat oven to 350°F | 180°F or 176°C | 82°C. Spoon about 1 cup of meat sauce on the base of a greased 9x13-inch baking dish, then cover with lasagne sheets. (Trim sheets to fit over the meat if needed.) [To Assemble]",
+        "Layer with 2 cups of meat sauce (or enough to cover pasta), 1 cup of white sauce and half of the cheddar cheese. Repeat layers (leaving the remaining cheese for the top). [To Assemble]",
+        "Pour the remaining meat sauce and white sauce over the last layer of lasagne sheets and top with the remaining Cheddar cheese. [To Assemble]",
+        "Bake for 25 minutes or until golden and bubbling. [To Assemble]",
+        "Garnish with parsley and let stand for about 10 minutes before slicing and serving. [To Assemble]"
+      ],
+      "preparationMinutes": 85,
+      "cookingMinutes": 75,
+      "servings": 8,
+      "image": "assets/images/recipes/lasagne.webp",
+      "isSideDish": true,
+      "isFavourite": false
+    }
+  }
+}

@@ -1,0 +1,54 @@
+# pre-commit hooks for YumMealPrep. See https://pre-commit.com
+#
+# Set up (see CONTRIBUTING.md):
+#   python3 -m venv .venv && . .venv/bin/activate
+#   pip install pre-commit
+#   pre-commit install
+#
+# Run against every file:
+#   pre-commit run --all-files
+
+repos:
+  - repo: local
+    hooks:
+      - id: import-sorter
+        name: Sort Dart imports
+        entry: dart run import_sorter:main
+        language: system
+        types: [dart]
+        pass_filenames: false
+
+      - id: dart-format
+        name: Format Dart code
+        entry: dart format
+        language: system
+        types: [dart]
+
+      - id: flutter-analyse
+        name: Analyse Dart code
+        entry: flutter analyze --no-fatal-infos
+        language: system
+        types: [dart]
+        pass_filenames: false
+
+      - id: foss-audit
+        name: Check for non-free dependencies
+        entry: ./scripts/foss_audit.sh
+        language: script
+        files: ^(pubspec\.(yaml|lock)|android/.*\.gradle(\.kts)?)$
+        pass_filenames: false
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      # The bundled Noto Sans fonts are just over 500 KB each.
+      - id: check-added-large-files
+        args: ["--maxkb=600"]
+      - id: check-json
+        exclude: ^\.vscode/ # VS Code files allow comments
+      - id: check-merge-conflict
+      - id: check-yaml
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+        args: ["--markdown-linebreak-ext=md"]

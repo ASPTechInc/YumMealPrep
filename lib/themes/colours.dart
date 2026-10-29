@@ -1,33 +1,31 @@
 import 'package:flutter/material.dart';
 
-class AppColours {
-  static   HexColour primaryColour = HexColour("#B1A582");
-  static final MaterialColor dark = _factoryColor(0xff3a3a3a);
+/// The colours used across YumMealPrep.
+///
+/// Material 3 derives the full light and dark palettes from [seed], so most
+/// widgets take their colours from `Theme.of(context).colorScheme` instead
+/// of from here.
+abstract final class AppColours {
+  static const Color seed = Color(0xFF00897B);
 
-  static MaterialColor _factoryColor(int color) {
-    return MaterialColor(color, <int, Color>{
-      50: Color(color),
-      100: Color(color),
-      200: Color(color),
-      300: Color(color),
-      400: Color(color),
-      500: Color(color),
-      600: Color(color),
-      700: Color(color),
-      800: Color(color),
-      900: Color(color),
-    });
-  }
+  // Meal type accents, used for calendar markers, chips and category cards.
+  static const Color appetisers = Color(0xFF43A047);
+  static const Color breakfast = Color(0xFFFFB300);
+  static const Color lunch = Color(0xFF1E88E5);
+  static const Color dinner = Color(0xFF3949AB);
+  static const Color dessert = Color(0xFFFB8C00);
+  static const Color smoothies = Color(0xFFD81B60);
 }
 
+/// A [Color] built from a hex string such as `#B1A582` or `FFB1A582`.
 class HexColour extends Color {
-  static int _getColourFromHex(String hexColour) {
-    hexColour = hexColour.toUpperCase().replaceAll("#", "");
-    if (hexColour.length == 6) {
-      hexColour = "FF$hexColour";
-    }
-    return int.parse(hexColour, radix: 16);
-  }
+  HexColour(String hexColor) : super(_getColourFromHex(hexColor));
 
-  HexColour(final String hexColor) : super(_getColourFromHex(hexColor));
+  static int _getColourFromHex(String hexColour) {
+    var hex = hexColour.toUpperCase().replaceAll('#', '');
+    if (hex.length == 6) {
+      hex = 'FF$hex';
+    }
+    return int.parse(hex, radix: 16);
+  }
 }

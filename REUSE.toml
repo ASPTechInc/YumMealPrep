@@ -1,0 +1,35 @@
+# REUSE licensing metadata: https://reuse.software/spec-3.3/
+# YumMealPrep source files do not carry SPDX headers, so these annotations
+# say who owns each file and under which licence. When several annotations
+# match a file, the last one wins, so the exceptions come after the default.
+# The licence texts are in LICENSES/.
+# Check with: pipx run reuse lint
+version = 1
+
+# Default: everything written for YumMealPrep (code, docs, sample data,
+# icon and logo). The food photos are third-party: each one's author and
+# licence is in assets/images/REUSE.toml, generated from
+# scripts/photo-sources.json by scripts/fetch-photos.py.
+[[annotations]]
+path = "**"
+precedence = "closest"
+SPDX-FileCopyrightText = "2022-2026 ASPTechnologies Incorporation"
+SPDX-License-Identifier = "MIT"
+
+# Platform runners were generated from Flutter's templates (BSD-3-Clause)
+# and then edited for YumMealPrep (MIT).
+[[annotations]]
+path = ["android/**", "ios/**", "linux/**", "macos/**", "windows/**", "web/**"]
+precedence = "closest"
+SPDX-FileCopyrightText = [
+  "2014 The Flutter Authors",
+  "2022-2026 ASPTechnologies Incorporation",
+]
+SPDX-License-Identifier = "BSD-3-Clause AND MIT"
+
+# Noto Sans, bundled so PDFs can print any text without downloading fonts.
+[[annotations]]
+path = "assets/fonts/**"
+precedence = "override"
+SPDX-FileCopyrightText = "2010-2020 Google LLC"
+SPDX-License-Identifier = "OFL-1.1"

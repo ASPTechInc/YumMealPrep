@@ -1,0 +1,7 @@
+First FOSS release of YumMealPrep.
+- Offline meal planner with any number of meals per day.
+- Meals and recipes with pictures, search and favourites.
+- Share or print meals and recipes as PDFs.
+- Import and export everything as a .backup file.
+- Sample meals and recipes, light and dark themes.
+- No accounts, adverts or tracking.

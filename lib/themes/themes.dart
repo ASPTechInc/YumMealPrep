@@ -1,22 +1,27 @@
 import 'package:flutter/material.dart';
+
 import 'package:yummealprep/themes/colours.dart';
 
-class AppTheme {
-  static ThemeData get lightTheme => ThemeData(
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        colorScheme:
-            ColorScheme.fromSwatch(primarySwatch: Colors.teal).copyWith(
-          secondary: Colors.amber,
-          brightness: Brightness.light,
-        ),
-      );
+abstract final class AppTheme {
+  static ThemeData get lightTheme => _build(Brightness.light);
 
-  static ThemeData get darkTheme => ThemeData(
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        colorScheme:
-            ColorScheme.fromSwatch(primarySwatch: AppColours.dark).copyWith(
-          secondary: Colors.grey,
-          brightness: Brightness.dark,
-        ),
-      );
+  static ThemeData get darkTheme => _build(Brightness.dark);
+
+  static ThemeData _build(Brightness brightness) {
+    final colourScheme = ColorScheme.fromSeed(
+      seedColor: AppColours.seed,
+      brightness: brightness,
+    );
+    return ThemeData(
+      colorScheme: colourScheme,
+      visualDensity: VisualDensity.adaptivePlatformDensity,
+      appBarTheme: const AppBarTheme(centerTitle: true),
+      inputDecorationTheme: const InputDecorationTheme(
+        border: OutlineInputBorder(),
+      ),
+      snackBarTheme: const SnackBarThemeData(
+        behavior: SnackBarBehavior.floating,
+      ),
+    );
+  }
 }

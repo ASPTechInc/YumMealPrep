@@ -1,41 +1,47 @@
-import 'package:adaptive_theme/adaptive_theme.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
-import 'package:yummealprep/routes/route_generator.dart';
-import 'package:yummealprep/routes/route_paths.dart';
-import 'package:yummealprep/themes/themes.dart';
+import 'package:flutter/services.dart';
+
+import 'package:yummealprep/app.dart';
+import 'package:yummealprep/app_services.dart';
+import 'package:yummealprep/data/sample_data.dart';
 import 'package:yummealprep/utils/constants.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(); // Initalise Firebase database
-  await dotenv.load(fileName: ".env"); // Load environment variables
-  final AdaptiveThemeMode? savedThemeMode = await AdaptiveTheme.getThemeMode();
-  runApp(MyApp(savedThemeMode: savedThemeMode));
-}
 
-class MyApp extends StatelessWidget {
-  final AdaptiveThemeMode? savedThemeMode;
+  // Lists YumMealPrep's own licence alongside its dependencies' licences on
+  // the "View licences" page.
+  LicenseRegistry.addLicense(() async* {
+    yield LicenseEntryWithLineBreaks([
+      Constants.appName,
+    ], await rootBundle.loadString(Constants.licence));
+    yield LicenseEntryWithLineBreaks([
+      'Noto Sans',
+    ], await rootBundle.loadString('assets/fonts/OFL.txt'));
+  });
 
-  const MyApp({Key? key, this.savedThemeMode}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return AdaptiveTheme(
-      light: AppTheme.lightTheme,
-      dark: AppTheme.darkTheme,
-      initial: savedThemeMode ?? AdaptiveThemeMode.light,
-      builder: (theme, darkTheme) => MaterialApp(
-        title: Constants.appName,
-        theme: theme,
-        darkTheme: darkTheme,
-        debugShowCheckedModeBanner: false,
-        initialRoute: RoutePaths.bottomNavBar,
-        onGenerateRoute: RouteGenerator.generateRoute,
-        navigatorObservers: [FlutterSmartDialog.observer],
-        builder: FlutterSmartDialog.init(),
+  final AppServices services;
+  try {
+    services = await AppServices.open();
+  } on Object catch (error) {
+    runApp(StartupErrorApp(error: error));
+    return;
+  }
+
+  try {
+    await SampleData(services.database, services.settings).addIfNeeded();
+  } on Object catch (error, stackTrace) {
+    // The app is still usable without the sample meals and recipes.
+    FlutterError.reportError(
+      FlutterErrorDetails(
+        exception: error,
+        stack: stackTrace,
+        library: 'yummealprep',
+        context: ErrorDescription('while adding the sample data'),
       ),
     );
   }
+
+  runApp(YumMealPrepApp(services: services));
 }

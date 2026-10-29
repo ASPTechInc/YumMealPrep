@@ -1,0 +1,18 @@
+YumMealPrep is a free and open-source (FOSS) meal planner and digital recipe book. Plan what you will eat each day, keep your favourite meals and recipes in one place, and share them as PDFs. Everything stays on your device and works offline.
+
+<b>Features</b>
+<ul>
+<li><b>Meal planner:</b> a calendar for breakfast, lunch, dinner, appetisers, desserts and smoothies. Plan as many meals a day as you like, and swipe one away to remove it.</li>
+<li><b>Meals:</b> add meals with a picture, drink, side dishes and photos of their nutrition labels.</li>
+<li><b>Recipe book:</b> ingredients you can tick off while you cook, numbered steps, and preparation and cooking times.</li>
+<li><b>Search:</b> find meals and recipes by name, description, ingredient, drink or side dish.</li>
+<li><b>Favourites:</b> keep the dishes you love one tap away.</li>
+<li><b>Share and print:</b> turn any meal or recipe into a PDF, made on your device.</li>
+<li><b>Import and export:</b> save everything, pictures included, to a single .backup file and load it on another device. The format is plain, documented JSON, so your data is never locked in and can be edited on a computer.</li>
+<li><b>Sample meals and recipes</b> show how the app works. Add your own with the Add meal and Add recipe buttons.</li>
+<li><b>Light and dark themes:</b> follow your device setting or choose one yourself.</li>
+</ul>
+
+<b>Privacy</b>
+
+YumMealPrep has no accounts, analytics, adverts or trackers, and does not ask for the internet permission. Your meals, recipes, plans and pictures are stored only on your device.

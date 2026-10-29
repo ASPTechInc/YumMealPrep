@@ -1,4 +1,7 @@
 {
+  "java.import.gradle.enabled": false,
+  "java.autobuild.enabled": false,
+  "gradle.autoDetect": "off",
   "cSpell.ignoreWords": [
     "ARGB",
     "asptechinc",

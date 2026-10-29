@@ -20,6 +20,9 @@ on:
     # Weekly, to catch changes in upstream dependencies
     - cron: "0 0 * * 0"
 
+permissions:
+  contents: read
+
 jobs:
   audit:
     runs-on: ubuntu-latest

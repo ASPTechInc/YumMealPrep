@@ -351,6 +351,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.0"
+  listen:
+    dependency: transitive
+    description:
+      name: listen
+      sha256: "47501a08016a43fcad79252439d723f50f14f88fa7bfd8a177e0a417e5c9e1f2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   matcher:
     dependency: transitive
     description:
@@ -539,18 +547,18 @@ packages:
     dependency: "direct main"
     description:
       name: sembast
-      sha256: "05da81104e6d4a1ecbeb9aa92062231620d360c8bd9303b82495842c4d92632b"
+      sha256: "4f71f8c95105918fa207065429c913f38d0fb05fec9f3a745bbf4c113f5d482b"
       url: "https://pub.dev"
     source: hosted
-    version: "3.9.0"
+    version: "3.10.1"
   sembast_web:
     dependency: "direct main"
     description:
       name: sembast_web
-      sha256: "99dad5c3610c7b9559add7f394ab272ccb76a595a28dc94bc40d05c45481c7bf"
+      sha256: "46e3a5512d0e53f5a01d15b0ba199260273de7b00d646d6c7012ef999a5201e2"
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.6+1"
+    version: "2.4.7"
   simple_gesture_detector:
     dependency: transitive
     description:
@@ -632,10 +640,10 @@ packages:
     dependency: transitive
     description:
       name: test_api
-      sha256: "2a122cbe059f8b610d3a5415f42e255b6c17b1f21eee1d960f31080237fb4f11"
+      sha256: "0a10344e901e5b2e63819567951cb6a06673ed6b84f40462188ff5a0c41f371f"
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.12"
+    version: "0.7.14"
   tint:
     dependency: transitive
     description:

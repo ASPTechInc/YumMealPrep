@@ -12,7 +12,7 @@ an item's "image" (and a meal's "nutritionFactImages") can therefore be:
   - a web address, downloaded now by this script:
         "image": "https://upload.wikimedia.org/.../Curry_goat.jpg"
   - a picture bundled with the app, used as it is:
-        "image": "assets/images/meals/pelau.webp"
+        "image": "assets/images/meals/fish-and-chips.webp"
 
 Each picture is prepared the same way the app prepares pictures you add
 (at most 1600 pixels, JPEG, no metadata such as location) and embedded
@@ -26,8 +26,8 @@ Usage:
 The input uses the format in docs/backup-format.md. "format" and "version"
 are added if missing, so a file can be as short as:
 
-  {"meals": {"curry-goat": {"name": "Curry Goat", "type": "dinner",
-                            "image": "photos/curry-goat.jpg"}}}
+  {"meals": [{"id": "curry-goat", "name": "Curry Goat", "type": "dinner",
+              "image": "photos/curry-goat.jpg"}]}
 
 Requirements: python3 and Pillow (pip install pillow).
 """
@@ -101,8 +101,8 @@ def main():
         return source
 
     for store in ("meals", "recipes"):
-        for item_id, item in (backup.get(store) or {}).items():
-            label = f"{store}/{item_id}"
+        for item in backup.get(store) or []:
+            label = f"{store}/{item.get('id')}"
             item["image"] = pack(item.get("image"), label)
             if store == "meals" and item.get("nutritionFactImages"):
                 item["nutritionFactImages"] = [
@@ -111,7 +111,7 @@ def main():
 
     output = args.output or Path(f"yummealprep-backup-{datetime.now():%Y%m%d-%H%M%S}.backup")
     output.write_text(json.dumps(backup, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    meals, recipes = len(backup.get("meals") or {}), len(backup.get("recipes") or {})
+    meals, recipes = len(backup.get("meals") or []), len(backup.get("recipes") or [])
     print(f"{output}: {meals} meals, {recipes} recipes, {len(images)} pictures embedded"
           + (f", {failed} pictures skipped" if failed else ""))
 

@@ -2,8 +2,9 @@
 
 **Export data** in YumMealPrep's side menu saves everything to a single file named like
 `yummealprep-backup-20261028-213707.backup` (the date and time of the export). A `.backup` file
-is plain UTF-8 JSON, so any text editor can open it, and **Import data** loads it again. The format is documented here so your data is never
-locked into the app: you can read it, edit it or convert it with any tool.
+is plain UTF-8 JSON, so any text editor can open it, and **Import data** loads it again. The format
+is documented here so your data is never locked into the app: you can read it, edit it or convert
+it with any tool.
 
 ## Structure
 
@@ -12,73 +13,90 @@ locked into the app: you can read it, edit it or convert it with any tool.
   "format": "yummealprep-backup",
   "version": 1,
   "exportedAt": "2026-10-28T19:04:11.000Z",
-  "meals": {
-    "<id>": { "name": "Pelau", "type": "lunch", "...": "..." }
-  },
-  "recipes": {
-    "<id>": { "name": "White Rice", "type": "lunch", "...": "..." }
-  },
-  "mealPlan": {
-    "<id>": { "mealId": "<meal id>", "day": "2026-11-02", "slot": "dinner" }
-  },
+  "meals": [
+    { "id": "<id>", "name": "Pelau", "type": "lunch", "...": "..." }
+  ],
+  "recipes": [
+    { "id": "<id>", "name": "White Rice", "type": "lunch", "...": "..." }
+  ],
+  "mealPlan": [
+    { "id": "<id>", "mealId": "<meal id>", "day": "2026-11-02", "slot": "dinner" }
+  ],
+  "sideDishes": ["Coleslaw", "Tossed Salad"],
+  "drinks": ["Mauby", "Sorrel"],
   "images": {
     "local:images/<file>.jpg": "<base64-encoded picture>"
   }
 }
 ```
 
-| Field        | Meaning                                                                       |
-| ------------ | ----------------------------------------------------------------------------- |
-| `format`     | Always `yummealprep-backup`.                                                  |
-| `version`    | The format version. The app refuses backups from a newer version than itself. |
-| `sampleDataVersion` | Only in the bundled sample data (`assets/data/seed.json`). |
-| `exportedAt` | When the backup was made, in UTC.                                             |
-| `meals`      | Meals, keyed by id.                                                           |
-| `recipes`    | Recipes, keyed by id.                                                         |
-| `mealPlan`   | Planned meals, keyed by id.                                                   |
-| `images`     | Pictures added in the app, keyed by the source the items use.                 |
+| Field               | Meaning                                                                        |
+| ------------------- | ------------------------------------------------------------------------------ |
+| `format`            | Always `yummealprep-backup`.                                                   |
+| `version`           | The format version. The app refuses backups from a newer version than itself.  |
+| `sampleDataVersion` | Only in the bundled sample data (`assets/data/seed.json`).                     |
+| `exportedAt`        | When the backup was made, in UTC.                                              |
+| `meals`             | A list of meals.                                                               |
+| `recipes`           | A list of recipes.                                                             |
+| `mealPlan`          | A list of planned meals.                                                       |
+| `sideDishes`        | The side dishes the meal form offers, as managed in **Manage side dishes**.    |
+| `drinks`            | The drinks the meal form offers, as managed in **Manage drinks**.              |
+| `images`            | The pictures items use, keyed by the image source the items refer to.          |
+
+Every field is optional except `format`; a missing list counts as empty.
+
+### Ids
+
+Every entry in `meals`, `recipes` and `mealPlan` has an `id`: any non-empty text. Ids only need to
+be unique within their own list, so a meal and a recipe may share one. The app checks this before
+changing anything: if an entry has no `id`, or two entries in the same list share one, the file is
+rejected with a message naming the list (and the repeated id), and your data is left as it was.
 
 ### Meal
 
-| Field                 | Type             | Notes                                                |
-| --------------------- | ---------------- | ---------------------------------------------------- |
-| `name`                | string           |                                                      |
-| `type`                | string           | `appetisers`, `breakfast`, `lunch`, `dinner`, `dessert` or `smoothies` |
-| `description`         | string           |                                                      |
-| `drink`               | string           |                                                      |
-| `sideDishes`          | list of strings  |                                                      |
-| `image`               | string or null   | An image source (see below).                         |
-| `nutritionFactImages` | list of strings  | Image sources of nutrition label photos.             |
-| `isFavourite`         | boolean          |                                                      |
+| Field                 | Type            | Notes                                                                  |
+| --------------------- | --------------- | ---------------------------------------------------------------------- |
+| `id`                  | string          | Unique among meals.                                                    |
+| `name`                | string          |                                                                        |
+| `type`                | string          | `appetisers`, `breakfast`, `lunch`, `dinner`, `dessert` or `smoothies` |
+| `description`         | string          |                                                                        |
+| `drink`               | string          |                                                                        |
+| `sideDishes`          | list of strings |                                                                        |
+| `image`               | string or null  | An image source (see below).                                           |
+| `nutritionFactImages` | list of strings | Image sources of nutrition label photos.                               |
+| `isFavourite`         | boolean         |                                                                        |
 
 ### Recipe
 
-| Field                | Type            | Notes                          |
-| -------------------- | --------------- | ------------------------------ |
-| `name`               | string          |                                |
-| `type`               | string          | As for meals.                  |
-| `description`        | string          |                                |
-| `ingredients`        | list of strings |                                |
+| Field                | Type            | Notes                              |
+| -------------------- | --------------- | ---------------------------------- |
+| `id`                 | string          | Unique among recipes.              |
+| `name`               | string          |                                    |
+| `type`               | string          | As for meals.                      |
+| `description`        | string          |                                    |
+| `ingredients`        | list of strings |                                    |
 | `instructions`       | list of strings | In the order they are carried out. |
-| `preparationMinutes` | number or null  |                                |
-| `cookingMinutes`     | number or null  |                                |
-| `servings`           | number or null  |                                |
-| `image`              | string or null  | An image source.               |
-| `isSideDish`         | boolean         |                                |
-| `isFavourite`        | boolean         |                                |
+| `preparationMinutes` | number or null  |                                    |
+| `cookingMinutes`     | number or null  |                                    |
+| `servings`           | number or null  |                                    |
+| `image`              | string or null  | An image source.                   |
+| `isSideDish`         | boolean         |                                    |
+| `isFavourite`        | boolean         |                                    |
 
 ### Planned meal
 
-| Field    | Type   | Notes                                   |
-| -------- | ------ | --------------------------------------- |
-| `mealId` | string | The id of a meal.                       |
-| `day`    | string | The date, as `yyyy-MM-dd`.              |
-| `slot`   | string | Which part of the day, as for `type`.   |
+| Field    | Type   | Notes                                 |
+| -------- | ------ | ------------------------------------- |
+| `id`     | string | Unique among planned meals.           |
+| `mealId` | string | The `id` of a meal.                   |
+| `day`    | string | The date, as `yyyy-MM-dd`.            |
+| `slot`   | string | Which part of the day, as for `type`. |
 
 ### Image sources
 
-- `assets/...`: a picture bundled with the app, such as the sample meals' pictures. These are not
-  embedded, because every copy of the app has them.
+- `assets/...`: a picture bundled with the app, such as the sample meals' pictures. Its bytes are
+  embedded in `images` too, so the backup also works in a copy of the app without that picture. A
+  copy that has it keeps using its own.
 - `local:images/<hash>.jpg`: a picture you added. Its bytes are embedded in `images`.
 - `data:image/...;base64,...`: a picture stored inline (used by the web version).
 
@@ -103,13 +121,17 @@ The backup is meant to be edited. To change many items at once, fix typos or tid
 
 1. In the app, open the side menu and choose **Export data**. Save the file somewhere you can
    reach from a computer.
-2. Open it in any text editor. Each meal and recipe is one entry under `meals` or `recipes`,
-   keyed by its id. Edit the fields, add entries (any unique id will do) or delete entries.
+2. Open it in any text editor. Each meal and recipe is one entry in the `meals` or `recipes` list,
+   with its `id` first. Edit the fields, add entries (give each a new, unique `id`) or delete
+   entries.
 3. Copy the file back and choose **Import data**, then **Replace everything**.
 
 Keep the JSON valid (commas between entries, double quotes around text). If the app cannot read
-the file it tells you and changes nothing. Pictures you added are stored in `images` as base64
-text; leave those lines as they are.
+the file it tells you and changes nothing. Pictures are stored in `images` as base64 text; leave
+those lines as they are.
+
+To write a backup from scratch, with pictures from your computer or the web, see
+[Writing a backup by hand](../README.md#writing-a-backup-by-hand) and `scripts/pack-backup.py`.
 
 ## Importing
 
@@ -128,9 +150,9 @@ skipped. Unknown fields are ignored and missing fields fall back to empty values
 ## sembast exports
 
 The app stores its data with [sembast](https://pub.dev/packages/sembast), in three stores:
-`meals`, `recipes` and `meal_plan`, each record keyed by id with the fields above. Restore also
-accepts sembast's own export format, as written by `exportDatabase` in
-`package:sembast/utils/sembast_import_export.dart`:
+`meals`, `recipes` and `meal_plan`, each record keyed by id with the fields above (the id is the
+record's key, not one of its fields). Import also accepts sembast's own export format, as written
+by `exportDatabase` in `package:sembast/utils/sembast_import_export.dart`:
 
 ```json
 {
@@ -142,16 +164,6 @@ accepts sembast's own export format, as written by `exportDatabase` in
 }
 ```
 
-The app's own format above is easier to edit, because each record sits next to its id.
-
-## Importing the old Firebase data
-
-`scripts/convert-firestore-export.py` converts an export of the old Cloud Firestore database into
-this format: a `.backup` file with every meal, recipe and planned meal, which you can load with
-**Import data**:
-
-```bash
-scripts/convert-firestore-export.py firestore-export.json   # writes yummealprep-backup-<date>-<time>.backup
-```
-
-See the comments at the top of the script for exactly what is converted.
+A sembast export carries no pictures, only references to them, so it is best for moving data
+within the same device. The app's own format above is easier to edit, because each record carries
+its id.

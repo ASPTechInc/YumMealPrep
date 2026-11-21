@@ -2,8 +2,9 @@
   "format": "yummealprep-backup",
   "version": 1,
   "sampleDataVersion": 1,
-  "meals": {
-    "EydGfAfwAR7vHM3yXmJ4": {
+  "meals": [
+    {
+      "id": "EydGfAfwAR7vHM3yXmJ4",
       "name": "Fish & Chips",
       "type": "lunch",
       "description": "Enjoy this delicious meal",
@@ -13,7 +14,8 @@
       "nutritionFactImages": [],
       "isFavourite": false
     },
-    "i9T9zZ2nxAN7gfz2iSLE": {
+    {
+      "id": "i9T9zZ2nxAN7gfz2iSLE",
       "name": "Pancake & Scrambled Eggs",
       "type": "breakfast",
       "description": "Pancake with scrambled eggs is one of the most popular of foods worldwide. It is easy, quick and tastes delicious.",
@@ -25,9 +27,10 @@
       "nutritionFactImages": [],
       "isFavourite": false
     }
-  },
-  "recipes": {
-    "XKyicoZAijVI7JWKsp2h": {
+  ],
+  "recipes": [
+    {
+      "id": "XKyicoZAijVI7JWKsp2h",
       "name": "Banana Smoothie",
       "type": "smoothies",
       "description": "Bananas are great choices for making homemade smoothies. Use them as a base and add different fruits for a quick and easy blended drink.",
@@ -51,7 +54,8 @@
       "isSideDish": false,
       "isFavourite": false
     },
-    "NoEOas8szH1lYjD696rs": {
+    {
+      "id": "NoEOas8szH1lYjD696rs",
       "name": "Lasagne",
       "type": "lunch",
       "description": "Lasagne are a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.",
@@ -98,5 +102,15 @@
       "isSideDish": true,
       "isFavourite": false
     }
-  }
+  ],
+  "sideDishes": [
+    "Coleslaw",
+    "Macaroni Salad"
+  ],
+  "drinks": [
+    "Coffee",
+    "Juice",
+    "Tea",
+    "Water"
+  ]
 }

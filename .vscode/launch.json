@@ -5,24 +5,24 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "YumMealPrep",
-      "request": "launch",
-      "type": "dart",
-      "program": "lib/main.dart"
-    },
-    {
-      "name": "YumMealPrep (Emulator)",
+      // Runs on the device selected in the status bar (Android emulator or physical device).
+      "name": "YumMealPrep (Android)",
       "request": "launch",
       "type": "dart",
       "program": "lib/main.dart",
-      "deviceId": "emulator-5554"
+      // Ignored on Android; prevents the GTK/Wayland 
+      // crash if Linux is the selected device.
+      "env": { "GDK_BACKEND": "x11" }
     },
     {
       "name": "YumMealPrep (Linux desktop)",
       "request": "launch",
       "type": "dart",
       "program": "lib/main.dart",
-      "deviceId": "linux"
+      "deviceId": "linux",
+      // GTK 3.24.52 on GNOME 50 aborts under 
+      // Wayland (missing xsettings 'antialiasing' key); use XWayland.
+      "env": { "GDK_BACKEND": "x11" }
     }
   ]
 }

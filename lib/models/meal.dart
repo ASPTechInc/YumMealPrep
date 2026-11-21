@@ -1,5 +1,7 @@
+// Flutter imports:
 import 'package:flutter/foundation.dart';
 
+// Project imports:
 import 'package:yummealprep/models/catalogue_item.dart';
 import 'package:yummealprep/models/meal_type.dart';
 import 'package:yummealprep/models/model_helpers.dart';

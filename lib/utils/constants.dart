@@ -21,40 +21,4 @@ abstract final class Constants {
   static const String changelog = 'CHANGELOG.md';
   static const String licence = 'LICENSE';
   static const String privacyPolicy = 'PRIVACY_POLICY.md';
-
-  /// Suggestions offered when adding a meal. Any other text is allowed.
-  static const List<String> drinkSuggestions = [
-    'Chocolate Tea',
-    'Coconut Water',
-    'Coffee',
-    'Juice',
-    'Mauby',
-    'Milk',
-    'Sorrel',
-    'Tea',
-    'Water',
-  ];
-
-  /// Side dishes offered as chips when adding a meal.
-  static const List<String> sideDishSuggestions = [
-    'Baked Beans',
-    'Baked Potatoes',
-    'Boiled Corn',
-    'Broccoli',
-    'Coleslaw',
-    'Dinner Rolls',
-    'French Fries',
-    'Fried Plantains',
-    'Fruit Salad',
-    'Garlic Bread',
-    'Macaroni Salad',
-    'Mashed Potatoes',
-    'Potato Salad',
-    'Roast Potatoes',
-    'Roasted Vegetables',
-    'Steamed Vegetables',
-    'Sweat Ground Provisions',
-    'Toast',
-    'Tossed Salad',
-  ];
 }

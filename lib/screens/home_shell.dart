@@ -1,5 +1,7 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
 
+// Project imports:
 import 'package:yummealprep/screens/browse/browse_screen.dart';
 import 'package:yummealprep/screens/favourites/favourites_screen.dart';
 import 'package:yummealprep/screens/planner/planner_screen.dart';

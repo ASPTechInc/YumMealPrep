@@ -1,5 +1,7 @@
+// Package imports:
 import 'package:sembast/sembast.dart';
 
+// Project imports:
 import 'package:yummealprep/data/app_database.dart';
 import 'package:yummealprep/models/meal_type.dart';
 import 'package:yummealprep/models/planned_meal.dart';
@@ -39,7 +41,18 @@ class MealPlanRepository {
     return entry;
   }
 
+  /// Plans each of [entries] in one transaction, so the plan updates once.
+  Future<void> addAll(Iterable<PlannedMeal> entries) =>
+      _db.transaction((txn) async {
+        for (final entry in entries) {
+          await _store.record(entry.id).put(txn, entry.toMap());
+        }
+      });
+
   Future<void> remove(String id) => _store.record(id).delete(_db);
+
+  Future<void> removeAll(Iterable<String> ids) =>
+      _store.records(ids).delete(_db);
 
   List<PlannedMeal> _toEntries(
     List<RecordSnapshot<String, Map<String, Object?>>> snapshots,
@@ -63,3 +76,23 @@ Map<DateTime, List<PlannedMeal>> groupByDay(Iterable<PlannedMeal> entries) {
   }
   return days;
 }
+
+/// New entries that plan [meals] again on each of [days]. A day that already
+/// has the same meal in the same slot keeps it rather than getting it twice.
+List<PlannedMeal> copyToDays(
+  Iterable<PlannedMeal> meals,
+  Iterable<DateTime> days,
+  Map<DateTime, List<PlannedMeal>> plan,
+) => [
+  for (final day in days.map(dateOnly))
+    for (final meal in meals)
+      if (!(plan[day] ?? const <PlannedMeal>[]).any(
+        (other) => other.mealId == meal.mealId && other.slot == meal.slot,
+      ))
+        PlannedMeal(
+          id: newId(),
+          mealId: meal.mealId,
+          date: day,
+          slot: meal.slot,
+        ),
+];

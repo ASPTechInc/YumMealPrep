@@ -1,14 +1,23 @@
+// Dart imports:
 import 'dart:io';
 
+// Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
 
+// Package imports:
+import 'package:flutter_test/flutter_test.dart';
+import 'package:table_calendar/table_calendar.dart';
+
+// Project imports:
 import 'package:yummealprep/app.dart';
 import 'package:yummealprep/app_services.dart';
 import 'package:yummealprep/data/sample_data.dart';
 import 'package:yummealprep/models/meal.dart';
 import 'package:yummealprep/models/meal_type.dart';
+import 'package:yummealprep/models/planned_meal.dart';
 import 'package:yummealprep/utils/constants.dart';
+import 'package:yummealprep/utils/dates.dart';
+import 'package:yummealprep/widgets/form_fields.dart';
 import 'package:yummealprep/widgets/item_image.dart';
 
 /// End-to-end user flows through the screens, on an in-memory database.
@@ -63,10 +72,25 @@ void main() {
       find.widgetWithText(TextFormField, 'Drink'),
       'Sorrel',
     );
-    final coleslaw = find.widgetWithText(FilterChip, 'Coleslaw');
-    await tester.ensureVisible(coleslaw);
+    final sides = find.byType(SideDishesField);
+    await tester.ensureVisible(sides);
     await tester.pumpAndSettle();
-    await tester.tap(coleslaw);
+    await tester.tap(sides);
+    await tester.pumpAndSettle();
+
+    // The list is searchable, and a name that is not listed can be added.
+    await tester.enterText(find.byType(TextField).last, 'cole');
+    await tester.pumpAndSettle();
+    expect(find.widgetWithText(CheckboxListTile, 'Toast'), findsNothing);
+    await tester.tap(find.widgetWithText(CheckboxListTile, 'Coleslaw'));
+    await tester.enterText(find.byType(TextField).last, 'Pickled Onions');
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Add "Pickled Onions"'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Done'));
+    await tester.pumpAndSettle();
+    expect(find.widgetWithText(InputChip, 'Coleslaw'), findsOneWidget);
+
     await tester.tap(find.text('Save'));
     await settle(tester);
 
@@ -74,8 +98,61 @@ void main() {
     final meal = meals.singleWhere((meal) => meal.name == 'Curry Goat');
     expect(meal.image, isNull);
     expect(meal.drink, 'Sorrel');
-    expect(meal.sideDishes, ['Coleslaw']);
+    expect(meal.sideDishes, ['Coleslaw', 'Pickled Onions']);
     expect(find.text('Meal added'), findsOneWidget);
+  });
+
+  testWidgets('manages the side dishes the meal form offers', (tester) async {
+    await startApp(tester);
+    await tester.tap(find.text('Browse'));
+    await settle(tester);
+    await tester.tap(find.text('Add meal'));
+    await settle(tester);
+
+    final manage = find.text('Manage side dishes');
+    await tester.ensureVisible(manage);
+    await tester.pumpAndSettle();
+    await tester.tap(manage);
+    await settle(tester);
+
+    // The sample data's side dishes are listed.
+    expect(find.text('Coleslaw'), findsOneWidget);
+
+    await tester.tap(find.text('Add side dish'));
+    await tester.pumpAndSettle();
+    await tester.enterText(find.byType(TextField).last, 'Pickled Onions');
+    await tester.tap(find.text('Save'));
+    await settle(tester);
+    expect(find.text('Pickled Onions'), findsOneWidget);
+
+    await tester.tap(find.text('Coleslaw'));
+    await tester.pumpAndSettle();
+    await tester.enterText(find.byType(TextField).last, 'Red Coleslaw');
+    await tester.tap(find.text('Save'));
+    await settle(tester);
+    expect(find.text('Red Coleslaw'), findsOneWidget);
+
+    await tester.enterText(find.byType(SearchBar), 'onion');
+    await tester.pumpAndSettle();
+    expect(find.text('Red Coleslaw'), findsNothing);
+    expect(find.text('Pickled Onions'), findsOneWidget);
+
+    await tester.tap(find.byTooltip('Remove'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.widgetWithText(FilledButton, 'Remove'));
+    await settle(tester);
+    expect(
+      await db(tester, services.sideDishes.getAll),
+      isNot(contains('Pickled Onions')),
+    );
+
+    // Back in the form, the dropdown offers the renamed side dish.
+    await tester.pageBack();
+    await settle(tester);
+    await tester.tap(find.byType(SideDishesField));
+    await tester.pumpAndSettle();
+    expect(find.widgetWithText(CheckboxListTile, 'Red Coleslaw'), findsOne);
+    expect(find.widgetWithText(CheckboxListTile, 'Coleslaw'), findsNothing);
   });
 
   testWidgets('leaving a form with changes asks first', (tester) async {
@@ -127,6 +204,57 @@ void main() {
     await tester.tap(find.text('Undo'));
     await settle(tester);
     expect(find.text('1 meal'), findsOneWidget);
+  });
+
+  testWidgets("copies a day's meal by holding and dragging across days", (
+    tester,
+  ) async {
+    final today = dateOnly(DateTime.now());
+    final meal = (await db(tester, services.meals.getAll)).first;
+    await db(
+      tester,
+      () => services.mealPlan.add(
+        mealId: meal.id,
+        date: today,
+        slot: MealType.lunch,
+      ),
+    );
+    await startApp(tester);
+
+    // The two-week view always shows today and at least the next six days.
+    Finder dayCell(DateTime day) => find.descendant(
+      of: find.byType(TableCalendar<PlannedMeal>),
+      matching: find.text('${day.day}'),
+    );
+    final gesture = await tester.startGesture(tester.getCenter(dayCell(today)));
+    await tester.pump(const Duration(milliseconds: 600));
+    await gesture.moveTo(
+      tester.getCenter(
+        dayCell(DateTime(today.year, today.month, today.day + 1)),
+      ),
+    );
+    await tester.pump();
+    await gesture.moveTo(
+      tester.getCenter(
+        dayCell(DateTime(today.year, today.month, today.day + 2)),
+      ),
+    );
+    await tester.pump();
+    await gesture.up();
+    await settle(tester);
+
+    expect(find.text('Meal copied to 2 days'), findsOneWidget);
+    final plan = await db(tester, services.mealPlan.getAll);
+    expect(plan.map((entry) => entry.date), [
+      today,
+      DateTime(today.year, today.month, today.day + 1),
+      DateTime(today.year, today.month, today.day + 2),
+    ]);
+    expect(plan.map((entry) => entry.mealId).toSet(), {meal.id});
+
+    await tester.tap(find.text('Undo'));
+    await settle(tester);
+    expect(await db(tester, services.mealPlan.getAll), hasLength(1));
   });
 
   testWidgets('favourites a recipe and unfavourites it by swiping', (

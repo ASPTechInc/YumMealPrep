@@ -1,5 +1,7 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
 
+// Project imports:
 import 'package:yummealprep/app_services.dart';
 
 /// Shows a meal or recipe picture from any stored image source.

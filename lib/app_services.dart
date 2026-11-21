@@ -1,7 +1,10 @@
+// Flutter imports:
 import 'package:flutter/widgets.dart';
 
+// Project imports:
 import 'package:yummealprep/data/app_database.dart';
 import 'package:yummealprep/data/backup_service.dart';
+import 'package:yummealprep/data/choice_list_repository.dart';
 import 'package:yummealprep/data/image_references.dart' as references;
 import 'package:yummealprep/data/meal_plan_repository.dart';
 import 'package:yummealprep/data/meal_repository.dart';
@@ -18,6 +21,8 @@ class AppServices {
   }) : meals = MealRepository(database, images),
        recipes = RecipeRepository(database, images),
        mealPlan = MealPlanRepository(database),
+       sideDishes = ChoiceListRepository(database, ChoiceList.sideDishes),
+       drinks = ChoiceListRepository(database, ChoiceList.drinks),
        backup = BackupService(database, images);
 
   final AppDatabase database;
@@ -26,6 +31,8 @@ class AppServices {
   final MealRepository meals;
   final RecipeRepository recipes;
   final MealPlanRepository mealPlan;
+  final ChoiceListRepository sideDishes;
+  final ChoiceListRepository drinks;
   final BackupService backup;
 
   static Future<AppServices> open() async {
@@ -50,6 +57,11 @@ class AppServices {
   /// Deletes the pictures in [sources] that the app saved and nothing uses.
   Future<void> deleteUnusedImages(Iterable<String> sources) =>
       references.deleteUnusedImages(database.db, images, sources);
+
+  ChoiceListRepository choices(ChoiceList list) => switch (list) {
+    ChoiceList.sideDishes => sideDishes,
+    ChoiceList.drinks => drinks,
+  };
 
   Future<void> close() async {
     settings.dispose();

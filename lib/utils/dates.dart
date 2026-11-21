@@ -19,3 +19,19 @@ DateTime lastPlannableDay(DateTime today) =>
 /// Whether [date] is today or later.
 bool isTodayOrLater(DateTime date, {DateTime? now}) =>
     !dateOnly(date).isBefore(dateOnly(now ?? DateTime.now()));
+
+/// Every day from [a] to [b], both included, in order whichever comes first.
+List<DateTime> daysBetween(DateTime a, DateTime b) {
+  final first = dateOnly(a.isBefore(b) ? a : b);
+  final last = dateOnly(a.isBefore(b) ? b : a);
+  return [
+    // Stepped by calendar day rather than by 24 hours, which would drift
+    // across a daylight saving change.
+    for (
+      var day = first;
+      !day.isAfter(last);
+      day = DateTime(day.year, day.month, day.day + 1)
+    )
+      day,
+  ];
+}

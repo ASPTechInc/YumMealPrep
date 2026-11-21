@@ -1,11 +1,15 @@
+// Dart imports:
 import 'dart:async';
 
+// Flutter imports:
 import 'package:flutter/material.dart';
 
+// Project imports:
 import 'package:yummealprep/app_services.dart';
+import 'package:yummealprep/data/choice_list_repository.dart';
 import 'package:yummealprep/models/meal.dart';
 import 'package:yummealprep/models/meal_type.dart';
-import 'package:yummealprep/utils/constants.dart';
+import 'package:yummealprep/screens/meals/manage_choices_screen.dart';
 import 'package:yummealprep/utils/ids.dart';
 import 'package:yummealprep/utils/ui.dart';
 import 'package:yummealprep/widgets/form_fields.dart';
@@ -25,6 +29,12 @@ class MealFormScreen extends StatefulWidget {
 class _MealFormScreenState extends State<MealFormScreen> {
   final _formKey = GlobalKey<FormState>();
   late final AppServices _services = AppScope.of(context);
+  // Subscribed once here rather than in StreamBuilders: the fields sit in a
+  // lazy ListView, so scrolling or the keyboard closing rebuilds them, and
+  // the database streams can only be listened to once.
+  final List<StreamSubscription<List<String>>> _subscriptions = [];
+  List<String> _drinkChoices = const [];
+  List<String> _sideDishChoices = const [];
 
   late final TextEditingController _name = TextEditingController(
     text: widget.meal?.name,
@@ -35,11 +45,10 @@ class _MealFormScreenState extends State<MealFormScreen> {
   late final TextEditingController _drink = TextEditingController(
     text: widget.meal?.drink,
   );
-  final TextEditingController _otherSide = TextEditingController();
 
   late MealType _type =
       widget.meal?.type ?? widget.initialType ?? MealType.lunch;
-  late final List<String> _sideDishes = [...?widget.meal?.sideDishes];
+  late List<String> _sideDishes = [...?widget.meal?.sideDishes];
   late String? _image = widget.meal?.image;
   late final List<String> _nutritionFacts = [
     ...?widget.meal?.nutritionFactImages,
@@ -53,11 +62,27 @@ class _MealFormScreenState extends State<MealFormScreen> {
   bool get _isNew => widget.meal == null;
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_subscriptions.isNotEmpty) return;
+    _subscriptions.addAll([
+      _services.drinks.watch().listen(
+        (names) => setState(() => _drinkChoices = names),
+      ),
+      _services.sideDishes.watch().listen(
+        (names) => setState(() => _sideDishChoices = names),
+      ),
+    ]);
+  }
+
+  @override
   void dispose() {
+    for (final subscription in _subscriptions) {
+      unawaited(subscription.cancel());
+    }
     _name.dispose();
     _description.dispose();
     _drink.dispose();
-    _otherSide.dispose();
     super.dispose();
   }
 
@@ -97,19 +122,9 @@ class _MealFormScreenState extends State<MealFormScreen> {
     });
   }
 
-  void _toggleSide(String side, {required bool selected}) {
-    setState(() {
-      selected ? _sideDishes.add(side) : _sideDishes.remove(side);
-      _hasChanges = true;
-    });
-  }
-
-  void _addOtherSide() {
-    final side = _otherSide.text.trim();
-    if (side.isEmpty) return;
-    if (!_sideDishes.contains(side)) _toggleSide(side, selected: true);
-    _otherSide.clear();
-  }
+  void _manage(ChoiceList list) => Navigator.of(context).push<void>(
+    MaterialPageRoute(builder: (context) => ManageChoicesScreen(list: list)),
+  );
 
   /// Deletes pictures picked in this form that are not in [keep].
   void _discardPickedImages({Set<String> keep = const {}}) {
@@ -147,10 +162,6 @@ class _MealFormScreenState extends State<MealFormScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final sideChoices = {
-      ...Constants.sideDishSuggestions,
-      ..._sideDishes,
-    }.toList()..sort();
     return UnsavedChangesGuard(
       hasChanges: _hasChanges,
       onDiscard: _discardPickedImages,
@@ -171,7 +182,15 @@ class _MealFormScreenState extends State<MealFormScreen> {
           key: _formKey,
           onChanged: _changed,
           child: ListView(
-            padding: const EdgeInsets.all(16),
+            // Explicit padding replaces the system inset ListView would add
+            // on its own, so add it back to keep the last field clear of
+            // the navigation bar.
+            padding: EdgeInsets.fromLTRB(
+              16,
+              16,
+              16,
+              16 + MediaQuery.paddingOf(context).bottom,
+            ),
             children: [
               ImageField(
                 source: _image,
@@ -210,40 +229,27 @@ class _MealFormScreenState extends State<MealFormScreen> {
                 ),
               ),
               const SizedBox(height: 16),
-              _DrinkField(controller: _drink, onChanged: _changed),
-              const SizedBox(height: 24),
-              Text(
-                'Side dishes',
-                style: Theme.of(context).textTheme.titleSmall,
+              _DrinkField(
+                controller: _drink,
+                options: _drinkChoices,
+                onChanged: _changed,
               ),
-              const SizedBox(height: 8),
-              Wrap(
-                spacing: 8,
-                runSpacing: 4,
-                children: [
-                  for (final side in sideChoices)
-                    FilterChip(
-                      label: Text(side),
-                      selected: _sideDishes.contains(side),
-                      onSelected: (selected) =>
-                          _toggleSide(side, selected: selected),
-                    ),
-                ],
+              _ManageButton(
+                label: 'Manage drinks',
+                onPressed: () => _manage(ChoiceList.drinks),
               ),
-              const SizedBox(height: 8),
-              TextField(
-                controller: _otherSide,
-                textCapitalization: TextCapitalization.words,
-                decoration: InputDecoration(
-                  labelText: 'Another side dish',
-                  isDense: true,
-                  suffixIcon: IconButton(
-                    tooltip: 'Add side dish',
-                    icon: const Icon(Icons.add),
-                    onPressed: _addOtherSide,
-                  ),
-                ),
-                onSubmitted: (_) => _addOtherSide(),
+              const SizedBox(height: 16),
+              SideDishesField(
+                options: _sideDishChoices,
+                selected: _sideDishes,
+                onChanged: (sides) => setState(() {
+                  _sideDishes = sides;
+                  _hasChanges = true;
+                }),
+              ),
+              _ManageButton(
+                label: 'Manage side dishes',
+                onPressed: () => _manage(ChoiceList.sideDishes),
               ),
               const SizedBox(height: 24),
               Text(
@@ -305,11 +311,39 @@ class _MealFormScreenState extends State<MealFormScreen> {
   }
 }
 
-/// A text field that suggests common drinks but accepts any text.
+/// Opens the screen for editing the names a field suggests.
+class _ManageButton extends StatelessWidget {
+  const _ManageButton({required this.label, required this.onPressed});
+
+  final String label;
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 8),
+        child: OutlinedButton.icon(
+          onPressed: onPressed,
+          icon: const Icon(Icons.edit_note),
+          label: Text(label),
+        ),
+      ),
+    );
+  }
+}
+
+/// A text field that suggests the drinks in [options] but accepts any text.
 class _DrinkField extends StatefulWidget {
-  const _DrinkField({required this.controller, required this.onChanged});
+  const _DrinkField({
+    required this.controller,
+    required this.options,
+    required this.onChanged,
+  });
 
   final TextEditingController controller;
+  final List<String> options;
   final VoidCallback onChanged;
 
   @override
@@ -332,7 +366,7 @@ class _DrinkFieldState extends State<_DrinkField> {
       focusNode: _focusNode,
       optionsBuilder: (value) {
         final text = value.text.trim().toLowerCase();
-        return Constants.drinkSuggestions.where(
+        return widget.options.where(
           (drink) =>
               drink.toLowerCase().contains(text) && drink.toLowerCase() != text,
         );
@@ -342,6 +376,10 @@ class _DrinkFieldState extends State<_DrinkField> {
           TextFormField(
             controller: controller,
             focusNode: focusNode,
+            // On phones a tap outside keeps the focus by default, which
+            // leaves the suggestions open. Taps on the suggestions count as
+            // inside the field, so picking one still works.
+            onTapOutside: (_) => focusNode.unfocus(),
             textCapitalization: TextCapitalization.words,
             decoration: const InputDecoration(labelText: 'Drink'),
           ),

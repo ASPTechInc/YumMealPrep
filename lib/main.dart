@@ -1,7 +1,9 @@
+// Flutter imports:
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+// Project imports:
 import 'package:yummealprep/app.dart';
 import 'package:yummealprep/app_services.dart';
 import 'package:yummealprep/data/sample_data.dart';

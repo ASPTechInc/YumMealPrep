@@ -1,18 +1,26 @@
+// Dart imports:
 import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
 
+// Flutter imports:
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
+
+// Package imports:
 import 'package:flutter_test/flutter_test.dart';
 
+// Project imports:
 import 'package:yummealprep/app_services.dart';
 import 'package:yummealprep/data/app_database.dart';
 import 'package:yummealprep/data/backup_service.dart';
+import 'package:yummealprep/data/sample_data.dart';
 import 'package:yummealprep/data/settings_repository.dart';
 import 'package:yummealprep/models/meal.dart';
 import 'package:yummealprep/models/meal_type.dart';
 import 'package:yummealprep/models/recipe.dart';
 import 'package:yummealprep/services/image_store.dart';
 import 'package:yummealprep/services/image_store_io.dart';
+import 'package:yummealprep/utils/constants.dart';
 
 Future<AppServices> servicesWithFiles(Directory directory) async {
   final database = await AppDatabase.inMemory();
@@ -24,6 +32,9 @@ Future<AppServices> servicesWithFiles(Directory directory) async {
 }
 
 void main() {
+  // Lets the backups read the bundled pictures.
+  TestWidgetsFlutterBinding.ensureInitialized();
+
   late Directory deviceA;
   late Directory deviceB;
 
@@ -57,7 +68,7 @@ void main() {
           id: 'rice',
           name: 'Rice',
           type: MealType.lunch,
-          image: 'assets/images/recipes/vegetable-rice.webp',
+          image: 'assets/images/recipes/lasagne.webp',
         ),
       );
       await source.mealPlan.add(
@@ -80,8 +91,45 @@ void main() {
       // Bundled pictures are kept as they are.
       expect(
         (await target.recipes.get('rice'))!.image,
-        'assets/images/recipes/vegetable-rice.webp',
+        'assets/images/recipes/lasagne.webp',
       );
+
+      await source.close();
+      await target.close();
+    },
+  );
+
+  test(
+    'bundled pictures reach copies of the app that do not have them',
+    () async {
+      const asset = 'assets/images/recipes/lasagne.webp';
+      final source = await servicesWithFiles(deviceA);
+      await source.recipes.save(
+        const Recipe(
+          id: 'rice',
+          name: 'Rice',
+          type: MealType.lunch,
+          image: asset,
+        ),
+      );
+      final backup = await source.backup.export();
+      final bundled = await source.images.load(asset);
+      expect(
+        (jsonDecode(utf8.decode(backup)) as Map)['images'],
+        containsPair(asset, base64Encode(bundled!)),
+      );
+
+      final target = await servicesWithFiles(deviceB);
+      final olderApp = BackupService(
+        target.database,
+        target.images,
+        bundle: _NoAssets(),
+      );
+      await olderApp.restore(backup);
+
+      final restored = (await target.recipes.get('rice'))!.image!;
+      expect(target.images.owns(restored), isTrue);
+      expect(await target.images.readBytes(restored), bundled);
 
       await source.close();
       await target.close();
@@ -107,17 +155,100 @@ void main() {
     await services.close();
   });
 
+  group('records', () {
+    Uint8List file(Object? meals) => utf8.encode(
+      jsonEncode({
+        'format': 'yummealprep-backup',
+        'version': 1,
+        'meals': meals,
+      }),
+    );
+
+    test('are written as a list, each with its own id', () async {
+      final services = await AppServices.inMemory();
+      await services.meals.save(
+        const Meal(id: 'm', name: 'Pelau', type: MealType.lunch),
+      );
+      final backup =
+          jsonDecode(utf8.decode(await services.backup.export()))
+              as Map<String, Object?>;
+      final meals = backup['meals']! as List;
+      expect(meals, hasLength(1));
+      expect((meals.single as Map)['id'], 'm');
+      expect((meals.single as Map)['name'], 'Pelau');
+      await services.close();
+    });
+
+    test('are rejected when an id is used twice', () {
+      expect(
+        () => BackupService.parse(
+          file([
+            {'id': 'm', 'name': 'Pelau', 'type': 'lunch'},
+            {'id': 'm', 'name': 'Soup', 'type': 'lunch'},
+          ]),
+        ),
+        throwsA(isA<BackupFormatException>()),
+      );
+    });
+
+    test('are rejected without an id', () {
+      expect(
+        () => BackupService.parse(
+          file([
+            {'name': 'Pelau', 'type': 'lunch'},
+          ]),
+        ),
+        throwsA(isA<BackupFormatException>()),
+      );
+      expect(
+        () => BackupService.parse(
+          file([
+            {'id': ' ', 'name': 'Pelau', 'type': 'lunch'},
+          ]),
+        ),
+        throwsA(isA<BackupFormatException>()),
+      );
+    });
+
+    test('are rejected when not a list', () {
+      expect(
+        () => BackupService.parse(
+          file({
+            'm': {'name': 'Pelau', 'type': 'lunch'},
+          }),
+        ),
+        throwsA(isA<BackupFormatException>()),
+      );
+    });
+
+    test('are read without the id among their fields', () {
+      final contents = BackupService.parse(
+        file([
+          {'id': 'm', 'name': 'Pelau', 'type': 'lunch'},
+        ]),
+      );
+      expect(contents.meals, {
+        'm': {'name': 'Pelau', 'type': 'lunch'},
+      });
+    });
+  });
+
   test('skips planned meals whose meal is not available', () async {
     final services = await AppServices.inMemory();
     final backup = utf8.encode(
       jsonEncode({
         'format': 'yummealprep-backup',
         'version': 1,
-        'meals': <String, Object?>{},
-        'recipes': <String, Object?>{},
-        'mealPlan': {
-          'p1': {'mealId': 'missing', 'day': '2026-11-02', 'slot': 'lunch'},
-        },
+        'meals': <Object?>[],
+        'recipes': <Object?>[],
+        'mealPlan': [
+          {
+            'id': 'p1',
+            'mealId': 'missing',
+            'day': '2026-11-02',
+            'slot': 'lunch',
+          },
+        ],
       }),
     );
     final summary = await services.backup.restore(backup);
@@ -193,10 +324,11 @@ void main() {
       final backup =
           jsonDecode(utf8.decode(await services.backup.export()))
               as Map<String, Object?>;
-      final meals = backup['meals']! as Map<String, Object?>;
-      (meals['kept']! as Map<String, Object?>)['name'] = 'Pelau with Coleslaw';
-      meals.remove('gone');
-      (backup['mealPlan']! as Map<String, Object?>).clear();
+      final meals = (backup['meals']! as List).cast<Map<String, Object?>>();
+      meals.firstWhere((m) => m['id'] == 'kept')['name'] =
+          'Pelau with Coleslaw';
+      meals.removeWhere((m) => m['id'] == 'gone');
+      (backup['mealPlan']! as List).clear();
       final edited = utf8.encode(jsonEncode(backup));
 
       // Merging keeps the deleted meal; replacing removes it.
@@ -265,29 +397,53 @@ void main() {
     );
   });
 
-  // A personal backup kept beside the sample data. It is ignored by git, so
-  // the test only runs where the file exists.
-  final personal = File(
-    'assets/data/yummealprep-backup-20261028-213707.backup',
-  );
   test(
-    'imports the personal .backup file as it is',
+    'a backup of the sample data gives every item its picture elsewhere',
     () async {
-      final services = await AppServices.inMemory();
-      final summary = await services.backup.restore(
-        personal.readAsBytesSync(),
-        replaceAll: true,
+      // Load the sample data on one device and export it, so the backup is
+      // made the same way the app makes one.
+      final source = await servicesWithFiles(deviceA);
+      await SampleData(
+        source.database,
+        source.settings,
+      ).addFromJson(File(Constants.seedData).readAsStringSync());
+      final backup = await source.backup.export();
+
+      // Restore it in a copy of the app without the bundled pictures, so
+      // they only load if they travelled inside the backup.
+      final target = await servicesWithFiles(deviceB);
+      final olderApp = BackupService(
+        target.database,
+        target.images,
+        bundle: _NoAssets(),
       );
-      expect(summary.meals, greaterThan(2));
-      for (final meal in await services.meals.getAll()) {
-        final image = meal.image;
-        if (image != null) {
-          expect(File(image).existsSync(), isTrue, reason: image);
-        }
+      final summary = await olderApp.restore(backup, replaceAll: true);
+
+      final meals = await source.meals.getAll();
+      final recipes = await source.recipes.getAll();
+      expect(meals, isNotEmpty);
+      expect(recipes, isNotEmpty);
+      expect(summary.meals, meals.length);
+      expect(summary.recipes, recipes.length);
+      expect(
+        await target.sideDishes.getAll(),
+        await source.sideDishes.getAll(),
+      );
+      expect(await target.drinks.getAll(), await source.drinks.getAll());
+
+      final restored = [
+        ...(await target.meals.getAll()).map((meal) => meal.imageSources),
+        ...(await target.recipes.getAll()).map((recipe) => recipe.imageSources),
+      ].expand((sources) => sources).toList();
+      expect(restored, isNotEmpty);
+      for (final image in restored) {
+        expect(target.images.owns(image), isTrue, reason: image);
+        expect(await target.images.readBytes(image), isNotNull, reason: image);
       }
-      await services.close();
+
+      await source.close();
+      await target.close();
     },
-    skip: personal.existsSync() ? false : 'No personal backup on this machine',
   );
 
   group('pictures stay in step with the data', () {
@@ -356,13 +512,14 @@ void main() {
         jsonEncode({
           'format': 'yummealprep-backup',
           'version': 1,
-          'meals': {
-            'm': {
+          'meals': [
+            {
+              'id': 'm',
               'name': 'Soup',
               'type': 'lunch',
               'image': 'assets/images/meals/pelau.webp',
             },
-          },
+          ],
         }),
       );
       await services.backup.restore(file);
@@ -405,4 +562,17 @@ void main() {
     final source = await store.save(Uint8List.fromList([1, 2, 3]));
     expect(identical(store.resolve(source), store.resolve(source)), isTrue);
   });
+}
+
+/// The assets of a copy of the app that has none of the bundled pictures.
+class _NoAssets extends AssetBundle {
+  @override
+  Future<ByteData> load(String key) async =>
+      throw FlutterError('Unable to load asset: "$key".');
+
+  @override
+  Future<T> loadStructuredData<T>(
+    String key,
+    Future<T> Function(String value) parser,
+  ) async => parser(await loadString(key));
 }

@@ -1,6 +1,10 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:flutter_test/flutter_test.dart';
 
+// Project imports:
 import 'package:yummealprep/app_services.dart';
 import 'package:yummealprep/data/catalogue_repository.dart';
 import 'package:yummealprep/data/meal_plan_repository.dart';
@@ -143,6 +147,31 @@ void main() {
       );
       await services.mealPlan.remove(entry.id);
       expect(await services.mealPlan.getAll(), isEmpty);
+    });
+
+    test('copyToDays skips a meal a day already has in that slot', () async {
+      final monday = DateTime(2026, 11, 2);
+      final tuesday = DateTime(2026, 11, 3);
+      final wednesday = DateTime(2026, 11, 4);
+      final lunch = await services.mealPlan.add(
+        mealId: 'pelau',
+        date: monday,
+        slot: MealType.lunch,
+      );
+      await services.mealPlan.add(
+        mealId: 'pelau',
+        date: tuesday,
+        slot: MealType.lunch,
+      );
+      final plan = groupByDay(await services.mealPlan.getAll());
+
+      final copies = copyToDays([lunch], [tuesday, wednesday], plan);
+      expect(copies.map((copy) => copy.date), [wednesday]);
+
+      await services.mealPlan.addAll(copies);
+      expect(await services.mealPlan.getAll(), hasLength(3));
+      await services.mealPlan.removeAll(copies.map((copy) => copy.id));
+      expect(await services.mealPlan.getAll(), hasLength(2));
     });
   });
 

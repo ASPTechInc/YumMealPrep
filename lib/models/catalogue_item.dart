@@ -1,3 +1,4 @@
+// Project imports:
 import 'package:yummealprep/models/meal_type.dart';
 
 /// What meals and recipes have in common, so lists, search, favourites and

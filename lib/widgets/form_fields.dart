@@ -1,6 +1,10 @@
-import 'package:file_picker/file_picker.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
 
+// Package imports:
+import 'package:file_picker/file_picker.dart';
+
+// Project imports:
 import 'package:yummealprep/app_services.dart';
 import 'package:yummealprep/models/meal_type.dart';
 import 'package:yummealprep/services/image_processing.dart';
@@ -110,6 +114,177 @@ class MealTypeField extends StatelessWidget {
     );
   }
 }
+
+/// A dropdown that opens a searchable list of [options] to pick any number
+/// from. Typing a name that is not listed offers to add it.
+class SideDishesField extends StatelessWidget {
+  const SideDishesField({
+    required this.options,
+    required this.selected,
+    required this.onChanged,
+    super.key,
+  });
+
+  final Iterable<String> options;
+  final List<String> selected;
+  final ValueChanged<List<String>> onChanged;
+
+  Future<void> _open(BuildContext context) async {
+    final result = await showDialog<List<String>>(
+      context: context,
+      builder: (context) => _SideDishesDialog(
+        // A meal can have sides that are not in the suggestions (typed in
+        // earlier, or from a backup). They still need to be listed so they
+        // can be unticked.
+        options: {...options, ...selected},
+        selected: selected,
+      ),
+    );
+    if (result != null) onChanged(result);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // Drawn with InputDecorator so it matches the Type dropdown above it.
+    return InkWell(
+      onTap: () => _open(context),
+      borderRadius: BorderRadius.circular(4),
+      child: InputDecorator(
+        isEmpty: selected.isEmpty,
+        decoration: const InputDecoration(
+          labelText: 'Side dishes',
+          suffixIcon: Icon(Icons.arrow_drop_down),
+        ),
+        child: selected.isEmpty
+            ? null
+            : Wrap(
+                spacing: 8,
+                runSpacing: 4,
+                children: [
+                  for (final side in selected)
+                    InputChip(
+                      label: Text(side),
+                      onDeleted: () => onChanged(
+                        selected.where((other) => other != side).toList(),
+                      ),
+                    ),
+                ],
+              ),
+      ),
+    );
+  }
+}
+
+class _SideDishesDialog extends StatefulWidget {
+  const _SideDishesDialog({required this.options, required this.selected});
+
+  final Set<String> options;
+  final List<String> selected;
+
+  @override
+  State<_SideDishesDialog> createState() => _SideDishesDialogState();
+}
+
+class _SideDishesDialogState extends State<_SideDishesDialog> {
+  late final List<String> _options = widget.options.toList()..sort(_byName);
+
+  // Ticks change a copy, so Cancel leaves the meal as it was.
+  late final List<String> _selected = [...widget.selected];
+  final TextEditingController _search = TextEditingController();
+
+  @override
+  void dispose() {
+    _search.dispose();
+    super.dispose();
+  }
+
+  void _toggle(String side) => setState(() {
+    _selected.contains(side) ? _selected.remove(side) : _selected.add(side);
+  });
+
+  void _add(String side) => setState(() {
+    _options
+      ..add(side)
+      ..sort(_byName);
+    _selected.add(side);
+    _search.clear();
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final text = _search.text.trim();
+    final query = text.toLowerCase();
+    final matches = _options
+        .where((side) => side.toLowerCase().contains(query))
+        .toList();
+    // Only offer to add a name that is not already listed, whatever its
+    // case, so "coleslaw" does not end up beside "Coleslaw".
+    final canAdd =
+        text.isNotEmpty && !_options.any((side) => side.toLowerCase() == query);
+    return AlertDialog(
+      title: const Text('Side dishes'),
+      contentPadding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
+      content: SizedBox(
+        width: 400,
+        height: 480,
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: TextField(
+                controller: _search,
+                autofocus: true,
+                textCapitalization: TextCapitalization.words,
+                decoration: const InputDecoration(
+                  hintText: 'Search or add a side dish',
+                  prefixIcon: Icon(Icons.search),
+                  isDense: true,
+                ),
+                onChanged: (_) => setState(() {}),
+                onSubmitted: (_) {
+                  if (canAdd) _add(text);
+                },
+              ),
+            ),
+            const SizedBox(height: 8),
+            Expanded(
+              child: ListView(
+                children: [
+                  if (canAdd)
+                    ListTile(
+                      leading: const Icon(Icons.add),
+                      title: Text('Add "$text"'),
+                      onTap: () => _add(text),
+                    ),
+                  for (final side in matches)
+                    CheckboxListTile(
+                      title: Text(side),
+                      value: _selected.contains(side),
+                      controlAffinity: ListTileControlAffinity.leading,
+                      onChanged: (_) => _toggle(side),
+                    ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: const Text('Cancel'),
+        ),
+        FilledButton(
+          onPressed: () => Navigator.pop(context, _selected),
+          child: const Text('Done'),
+        ),
+      ],
+    );
+  }
+}
+
+/// Same order as the meal and recipe lists (see `compareByName`).
+int _byName(String a, String b) => a.toLowerCase().compareTo(b.toLowerCase());
 
 /// Wraps a form so leaving it with unsaved changes asks first.
 class UnsavedChangesGuard extends StatelessWidget {

@@ -1,9 +1,14 @@
+// Dart imports:
 import 'dart:async';
 
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+// Project imports:
 import 'package:yummealprep/app_services.dart';
 import 'package:yummealprep/screens/navigation.dart';
 import 'package:yummealprep/screens/settings/backup_actions.dart';

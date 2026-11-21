@@ -1,6 +1,10 @@
-import 'package:file_picker/file_picker.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
 
+// Package imports:
+import 'package:file_picker/file_picker.dart';
+
+// Project imports:
 import 'package:yummealprep/app_services.dart';
 import 'package:yummealprep/data/backup_service.dart';
 import 'package:yummealprep/utils/ui.dart';

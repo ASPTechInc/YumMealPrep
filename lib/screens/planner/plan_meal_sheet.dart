@@ -1,6 +1,10 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:intl/intl.dart';
 
+// Project imports:
 import 'package:yummealprep/app_services.dart';
 import 'package:yummealprep/data/catalogue_repository.dart';
 import 'package:yummealprep/models/meal.dart';

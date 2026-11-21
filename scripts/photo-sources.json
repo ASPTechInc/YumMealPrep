@@ -60,7 +60,8 @@
     "author": "Kolforn",
     "licence": "CC BY-SA 4.0",
     "spdx": "CC-BY-SA-4.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "bundled": false
   },
   "meal:Bakes & Corned Beef": {
     "output": "assets/images/meals/bakes-and-corned-beef.webp",
@@ -69,7 +70,8 @@
     "author": "Ll1324",
     "licence": "CC0",
     "spdx": "CC0-1.0",
-    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "bundled": false
   },
   "meal:Bakes & Saltfish": {
     "output": "assets/images/meals/bakes-and-saltfish.webp",
@@ -78,7 +80,8 @@
     "author": "gailf548 from New York State, USA",
     "licence": "CC BY 2.0",
     "spdx": "CC-BY-2.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by/2.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+    "bundled": false
   },
   "meal:Banana Fritters & Toast Bread": {
     "output": "assets/images/meals/banana-fritters-and-toast-bread.webp",
@@ -87,7 +90,8 @@
     "author": "Iloveporotta",
     "licence": "CC BY-SA 4.0",
     "spdx": "CC-BY-SA-4.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "bundled": false
   },
   "meal:Beef Lasagne & Salmon": {
     "output": "assets/images/meals/beef-lasagne-and-salmon.webp",
@@ -96,7 +100,8 @@
     "author": "Alpha",
     "licence": "CC BY-SA 2.0",
     "spdx": "CC-BY-SA-2.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "bundled": false
   },
   "meal:Beef Soup With Dumplings, Spaghetti & Mixed Vegetables": {
     "output": "assets/images/meals/beef-soup-with-dumplings-spaghetti-and-mixed-vegetables.webp",
@@ -105,7 +110,8 @@
     "author": "Apeach316",
     "licence": "CC BY-SA 2.0",
     "spdx": "CC-BY-SA-2.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "bundled": false
   },
   "meal:Callaloo Soup": {
     "output": "assets/images/meals/callaloo-soup.webp",
@@ -114,7 +120,8 @@
     "author": "GeoTrinity (Wikimedia Commons)",
     "licence": "CC BY-SA 4.0",
     "spdx": "CC-BY-SA-4.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "bundled": false
   },
   "meal:Chicken Soup With Dumplings, Spaghetti & Mixed Vegetables": {
     "output": "assets/images/meals/chicken-soup-with-dumplings-spaghetti-and-mixed-vegetables.webp",
@@ -123,7 +130,8 @@
     "author": "Jonathunder",
     "licence": "CC BY-SA 3.0",
     "spdx": "CC-BY-SA-3.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "bundled": false
   },
   "meal:Chowmein": {
     "output": "assets/images/meals/chowmein.webp",
@@ -132,7 +140,8 @@
     "author": "Gaurav Dhwaj Khadka",
     "licence": "CC BY-SA 4.0",
     "spdx": "CC-BY-SA-4.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "bundled": false
   },
   "meal:Corn Pie & Stew Chicken": {
     "output": "assets/images/meals/corn-pie-and-stew-chicken.webp",
@@ -141,7 +150,8 @@
     "author": "Carl",
     "licence": "CC BY-SA 2.0",
     "spdx": "CC-BY-SA-2.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "bundled": false
   },
   "meal:Corn Pie, Roast Potatoes & Fried Chicken": {
     "output": "assets/images/meals/corn-pie-roast-potatoes-and-fried-chicken.webp",
@@ -150,7 +160,8 @@
     "author": "Silar",
     "licence": "CC BY-SA 4.0",
     "spdx": "CC-BY-SA-4.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "bundled": false
   },
   "meal:Corned Beef & Macaroni": {
     "output": "assets/images/meals/corned-beef-and-macaroni.webp",
@@ -159,7 +170,8 @@
     "author": "MBisanz",
     "licence": "CC BY-SA 3.0",
     "spdx": "CC-BY-SA-3.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "bundled": false
   },
   "meal:Corned Beef & Rice": {
     "output": "assets/images/meals/corned-beef-and-rice.webp",
@@ -168,7 +180,8 @@
     "author": "Aerous",
     "licence": "CC BY-SA 4.0",
     "spdx": "CC-BY-SA-4.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "bundled": false
   },
   "meal:Corned Beef & Spaghetti": {
     "output": "assets/images/meals/corned-beef-and-spaghetti.webp",
@@ -177,7 +190,8 @@
     "author": "Wyldephang",
     "licence": "CC BY-SA 4.0",
     "spdx": "CC-BY-SA-4.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "bundled": false
   },
   "meal:Cornflakes & Milk": {
     "output": "assets/images/meals/cornflakes-and-milk.webp",
@@ -186,7 +200,8 @@
     "author": "anemoneprojectors",
     "licence": "CC BY-SA 2.0",
     "spdx": "CC-BY-SA-2.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "bundled": false
   },
   "meal:Cornmeal Porridge": {
     "output": "assets/images/meals/cornmeal-porridge.webp",
@@ -195,7 +210,8 @@
     "author": "David Orban",
     "licence": "CC BY 2.0",
     "spdx": "CC-BY-2.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by/2.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+    "bundled": false
   },
   "meal:Diced Chicken, Mixed Vegetables, Baked Beans & Spaghetti": {
     "output": "assets/images/meals/diced-chicken-mixed-vegetables-baked-beans-and-spaghetti.webp",
@@ -204,7 +220,8 @@
     "author": "FBenjr123",
     "licence": "CC BY-SA 4.0",
     "spdx": "CC-BY-SA-4.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "bundled": false
   },
   "meal:Egg Fried Rice With Salmon": {
     "output": "assets/images/meals/egg-fried-rice-with-salmon.webp",
@@ -213,7 +230,8 @@
     "author": "naotakem",
     "licence": "CC BY 2.0",
     "spdx": "CC-BY-2.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by/2.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+    "bundled": false
   },
   "meal:Fish & Chips": {
     "output": "assets/images/meals/fish-and-chips.webp",
@@ -231,7 +249,8 @@
     "author": "Ocdp",
     "licence": "CC0",
     "spdx": "CC0-1.0",
-    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "bundled": false
   },
   "meal:Fried Chicken & Macaroni": {
     "output": "assets/images/meals/fried-chicken-and-macaroni.webp",
@@ -240,7 +259,8 @@
     "author": "Gatorfan252525",
     "licence": "CC BY-SA 4.0",
     "spdx": "CC-BY-SA-4.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "bundled": false
   },
   "meal:Fried Chicken and Chips": {
     "output": "assets/images/meals/fried-chicken-and-chips.webp",
@@ -249,7 +269,8 @@
     "author": "Jameswasswa",
     "licence": "CC BY-SA 4.0",
     "spdx": "CC-BY-SA-4.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "bundled": false
   },
   "meal:Garlic Bread & Fish": {
     "output": "assets/images/meals/garlic-bread-and-fish.webp",
@@ -258,7 +279,8 @@
     "author": "Infrogmation of New Orleans",
     "licence": "CC BY-SA 2.0",
     "spdx": "CC-BY-SA-2.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "bundled": false
   },
   "meal:Green Banana Porridge": {
     "output": "assets/images/meals/green-banana-porridge.webp",
@@ -267,7 +289,8 @@
     "author": "Shisma",
     "licence": "CC BY 4.0",
     "spdx": "CC-BY-4.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by/4.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0",
+    "bundled": false
   },
   "meal:Mac and Cheese": {
     "output": "assets/images/meals/mac-and-cheese.webp",
@@ -276,7 +299,8 @@
     "author": "Sumeet Jain from San Francisco, USA",
     "licence": "CC BY-SA 2.0",
     "spdx": "CC-BY-SA-2.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "bundled": false
   },
   "meal:Macaroni Pie & Fried Chicken": {
     "output": "assets/images/meals/macaroni-pie-and-fried-chicken.webp",
@@ -285,7 +309,8 @@
     "author": "Wendy Harman from Washington DC, USA",
     "licence": "CC BY 2.0",
     "spdx": "CC-BY-2.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by/2.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+    "bundled": false
   },
   "meal:Macaroni Pie, Coleslaw & Salmon": {
     "output": "assets/images/meals/macaroni-pie-coleslaw-and-salmon.webp",
@@ -294,7 +319,8 @@
     "author": "PattayaPatrol",
     "licence": "CC BY-SA 4.0",
     "spdx": "CC-BY-SA-4.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "bundled": false
   },
   "meal:Mashed Potatoes & Stew Chicken": {
     "output": "assets/images/meals/mashed-potatoes-and-stew-chicken.webp",
@@ -303,7 +329,8 @@
     "author": "Jaymuiaphotography",
     "licence": "CC BY-SA 4.0",
     "spdx": "CC-BY-SA-4.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "bundled": false
   },
   "meal:Mince Meat, Spaghetti Mixed With Tomato Sauce & Cheese on Top": {
     "output": "assets/images/meals/mince-meat-spaghetti-mixed-with-tomato-sauce-and-cheese-on-top.webp",
@@ -312,7 +339,8 @@
     "author": "Superbass",
     "licence": "CC BY-SA 3.0",
     "spdx": "CC-BY-SA-3.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "bundled": false
   },
   "meal:Omelette and Toast Bread": {
     "output": "assets/images/meals/omelette-and-toast-bread.webp",
@@ -321,7 +349,8 @@
     "author": "Kgbo",
     "licence": "CC BY-SA 4.0",
     "spdx": "CC-BY-SA-4.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "bundled": false
   },
   "meal:Pancake & Scrambled Eggs": {
     "output": "assets/images/meals/pancake-and-scrambled-eggs.webp",
@@ -339,7 +368,8 @@
     "author": "Dllu",
     "licence": "CC BY-SA 4.0",
     "spdx": "CC-BY-SA-4.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "bundled": false
   },
   "meal:Pelau": {
     "output": "assets/images/meals/pelau.webp",
@@ -354,7 +384,8 @@
       0.1758,
       0.7747,
       0.8203
-    ]
+    ],
+    "bundled": false
   },
   "meal:Pizza": {
     "output": "assets/images/meals/pizza.webp",
@@ -363,7 +394,8 @@
     "author": "Valerio Capello at English Wikipedia",
     "licence": "CC BY-SA 3.0",
     "spdx": "CC-BY-SA-3.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0/"
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "bundled": false
   },
   "meal:Potato Pie": {
     "output": "assets/images/meals/potato-pie.webp",
@@ -372,7 +404,8 @@
     "author": "Dreamyshade",
     "licence": "CC BY-SA 3.0",
     "spdx": "CC-BY-SA-3.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "bundled": false
   },
   "meal:Pumpkin Soup": {
     "output": "assets/images/meals/pumpkin-soup.webp",
@@ -381,7 +414,8 @@
     "author": "MOs810",
     "licence": "CC BY-SA 4.0",
     "spdx": "CC-BY-SA-4.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "bundled": false
   },
   "meal:Quaker Oats Porridge": {
     "output": "assets/images/meals/quaker-oats-porridge.webp",
@@ -390,7 +424,8 @@
     "author": "JIP",
     "licence": "CC BY-SA 4.0",
     "spdx": "CC-BY-SA-4.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "bundled": false
   },
   "meal:Roast Potatoes & Fried Chicken": {
     "output": "assets/images/meals/roast-potatoes-and-fried-chicken.webp",
@@ -399,7 +434,8 @@
     "author": "Benreis",
     "licence": "CC BY-SA 4.0",
     "spdx": "CC-BY-SA-4.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "bundled": false
   },
   "meal:Roti & Curry Chicken": {
     "output": "assets/images/meals/roti-and-curry-chicken.webp",
@@ -408,7 +444,8 @@
     "author": "Vishunpura Chandauli",
     "licence": "CC BY-SA 4.0",
     "spdx": "CC-BY-SA-4.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "bundled": false
   },
   "meal:Saltfish & Rice": {
     "output": "assets/images/meals/saltfish-and-rice.webp",
@@ -417,7 +454,8 @@
     "author": "DanielPenfield",
     "licence": "CC BY-SA 4.0",
     "spdx": "CC-BY-SA-4.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "bundled": false
   },
   "meal:Saltfish Cake": {
     "output": "assets/images/meals/saltfish-cake.webp",
@@ -426,7 +464,8 @@
     "author": "Xaymacan",
     "licence": "CC BY-SA 4.0",
     "spdx": "CC-BY-SA-4.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "bundled": false
   },
   "meal:Scampi & Roast Potatoes": {
     "output": "assets/images/meals/scampi-and-roast-potatoes.webp",
@@ -435,7 +474,8 @@
     "author": "Andy Li",
     "licence": "CC0",
     "spdx": "CC0-1.0",
-    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "bundled": false
   },
   "meal:Spaghetti & Meat Balls": {
     "output": "assets/images/meals/spaghetti-and-meat-balls.webp",
@@ -444,7 +484,8 @@
     "author": "jeffreyw",
     "licence": "CC BY 2.0",
     "spdx": "CC-BY-2.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by/2.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+    "bundled": false
   },
   "meal:Spinach, Scrambled Eggs, Bacon & Toast": {
     "output": "assets/images/meals/spinach-scrambled-eggs-bacon-and-toast.webp",
@@ -453,7 +494,8 @@
     "author": "ultrakml from Melbourne, Australia",
     "licence": "CC BY 2.0",
     "spdx": "CC-BY-2.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by/2.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+    "bundled": false
   },
   "meal:Stew Chicken & Macaroni": {
     "output": "assets/images/meals/stew-chicken-and-macaroni.webp",
@@ -462,7 +504,8 @@
     "author": "Halima Waziri",
     "licence": "CC BY-SA 4.0",
     "spdx": "CC-BY-SA-4.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "bundled": false
   },
   "meal:Stuffed Ham & Egg Bread": {
     "output": "assets/images/meals/stuffed-ham-and-egg-bread.webp",
@@ -471,7 +514,8 @@
     "author": "Pauloleong2002",
     "licence": "CC BY-SA 4.0",
     "spdx": "CC-BY-SA-4.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "bundled": false
   },
   "meal:Sweat Ground Provisions & Stew Chicken": {
     "output": "assets/images/meals/sweat-ground-provisions-and-stew-chicken.webp",
@@ -480,7 +524,8 @@
     "author": "Zakaria Tunsung",
     "licence": "CC0",
     "spdx": "CC0-1.0",
-    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "bundled": false
   },
   "meal:Waffle Sandwich with Scrambled Eggs, Tomatoes and Ham": {
     "output": "assets/images/meals/waffle-sandwich-with-scrambled-eggs-tomatoes-and-ham.webp",
@@ -489,7 +534,8 @@
     "author": "Missvain",
     "licence": "CC BY 4.0",
     "spdx": "CC-BY-4.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by/4.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0",
+    "bundled": false
   },
   "recipe:Baked Bread": {
     "output": "assets/images/recipes/baked-bread.webp",
@@ -498,7 +544,8 @@
     "author": "Daniel J. Layton",
     "licence": "CC BY-SA 3.0",
     "spdx": "CC-BY-SA-3.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "bundled": false
   },
   "recipe:Bakes": {
     "output": "assets/images/recipes/bakes.webp",
@@ -507,7 +554,8 @@
     "author": "Dqfn13",
     "licence": "CC BY-SA 4.0",
     "spdx": "CC-BY-SA-4.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "bundled": false
   },
   "recipe:Banana Smoothie": {
     "output": "assets/images/recipes/banana-smoothie.webp",
@@ -525,7 +573,8 @@
     "author": "rawpixel.com",
     "licence": "CC0",
     "spdx": "CC0-1.0",
-    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "bundled": false
   },
   "recipe:Jerk Chicken": {
     "output": "assets/images/recipes/jerk-chicken.webp",
@@ -534,7 +583,8 @@
     "author": "Secretlondon",
     "licence": "CC BY-SA 3.0",
     "spdx": "CC-BY-SA-3.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0/"
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "bundled": false
   },
   "recipe:Lasagne": {
     "output": "assets/images/recipes/lasagne.webp",
@@ -552,7 +602,8 @@
     "author": "Scott Veg",
     "licence": "CC BY 2.0",
     "spdx": "CC-BY-2.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by/2.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+    "bundled": false
   },
   "recipe:Macaroni Pie": {
     "output": "assets/images/recipes/macaroni-pie.webp",
@@ -561,7 +612,8 @@
     "author": "Upjav",
     "licence": "CC0",
     "spdx": "CC0-1.0",
-    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "bundled": false
   },
   "recipe:Macaroni Salad": {
     "output": "assets/images/recipes/macaroni-salad.webp",
@@ -570,7 +622,8 @@
     "author": "Alabama Extension",
     "licence": "CC0",
     "spdx": "CC0-1.0",
-    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "bundled": false
   },
   "recipe:Mash Potato Salad": {
     "output": "assets/images/recipes/mash-potato-salad.webp",
@@ -579,7 +632,8 @@
     "author": "jules",
     "licence": "CC BY 2.0",
     "spdx": "CC-BY-2.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by/2.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+    "bundled": false
   },
   "recipe:Mashed Potatoes": {
     "output": "assets/images/recipes/mashed-potatoes.webp",
@@ -587,7 +641,8 @@
     "file": "MashedPotatoes.jpg",
     "author": "Renee Comet (photographer)",
     "licence": "Public domain",
-    "spdx": "LicenseRef-PublicDomain"
+    "spdx": "LicenseRef-PublicDomain",
+    "bundled": false
   },
   "recipe:Steam Vegetables": {
     "output": "assets/images/recipes/steam-vegetables.webp",
@@ -596,7 +651,8 @@
     "author": "Eric Fischer",
     "licence": "CC BY 2.0",
     "spdx": "CC-BY-2.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by/2.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+    "bundled": false
   },
   "recipe:Sweat Ground Provisions": {
     "output": "assets/images/recipes/sweat-ground-provisions.webp",
@@ -605,7 +661,8 @@
     "author": "Grueslayer",
     "licence": "CC BY-SA 4.0",
     "spdx": "CC-BY-SA-4.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "bundled": false
   },
   "recipe:Tomato Sauce": {
     "output": "assets/images/recipes/tomato-sauce.webp",
@@ -614,7 +671,8 @@
     "author": "Dennis Klein klein2",
     "licence": "CC0",
     "spdx": "CC0-1.0",
-    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "bundled": false
   },
   "recipe:Vegetable rice": {
     "output": "assets/images/recipes/vegetable-rice.webp",
@@ -623,7 +681,8 @@
     "author": "safaritravelplus",
     "licence": "CC0",
     "spdx": "CC0-1.0",
-    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "bundled": false
   },
   "recipe:Vegetable Soup": {
     "output": "assets/images/recipes/vegetable-soup.webp",
@@ -632,7 +691,8 @@
     "author": "Scott Teresi",
     "licence": "CC BY-SA 2.0",
     "spdx": "CC-BY-SA-2.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "bundled": false
   },
   "recipe:White rice (Plain)": {
     "output": "assets/images/recipes/white-rice-plain.webp",
@@ -641,6 +701,697 @@
     "author": "Guilhem Vellut from Paris, France",
     "licence": "CC BY 2.0",
     "spdx": "CC-BY-2.0",
-    "licenceUrl": "https://creativecommons.org/licenses/by/2.0"
+    "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+    "bundled": false
+  },
+  "recipe:Baked Bread #2": {
+    "output": "assets/images/recipes/baked-bread-2.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:White_bread.jpg",
+    "file": "White bread.jpg",
+    "author": "ElinorD",
+    "licence": "CC BY-SA 3.0",
+    "spdx": "CC-BY-SA-3.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "bundled": false
+  },
+  "recipe:Baked Chicken": {
+    "output": "assets/images/recipes/baked-chicken.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Roasted_Chicken_Breast_(32868373128).jpg",
+    "file": "Roasted Chicken Breast (32868373128).jpg",
+    "author": "MBC Foods from Australia",
+    "licence": "CC BY 2.0",
+    "spdx": "CC-BY-2.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+    "bundled": false
+  },
+  "recipe:Banana Bread": {
+    "output": "assets/images/recipes/banana-bread.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Banana_bread_slices.jpg",
+    "file": "Banana bread slices.jpg",
+    "author": "Shisma",
+    "licence": "CC BY 4.0",
+    "spdx": "CC-BY-4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0",
+    "bundled": false
+  },
+  "recipe:Banana Fritters": {
+    "output": "assets/images/recipes/banana-fritters.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Banana_Fritters_(2437981960).jpg",
+    "file": "Banana Fritters (2437981960).jpg",
+    "author": "Mack Male from Edmonton, AB, Canada",
+    "licence": "CC BY-SA 2.0",
+    "spdx": "CC-BY-SA-2.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "bundled": false
+  },
+  "recipe:Barbecue Sauce": {
+    "output": "assets/images/recipes/barbecue-sauce.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Barbecuesauces.jpg",
+    "file": "Barbecuesauces.jpg",
+    "author": "Thogru",
+    "licence": "CC BY-SA 3.0",
+    "spdx": "CC-BY-SA-3.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "bundled": false
+  },
+  "recipe:Beetroot": {
+    "output": "assets/images/recipes/beetroot.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Round_textured_slices_of_beetroot_(40640184925).jpg",
+    "file": "Round textured slices of beetroot (40640184925).jpg",
+    "author": "Rawpixel Ltd",
+    "licence": "CC BY 2.0",
+    "spdx": "CC-BY-2.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+    "bundled": false
+  },
+  "recipe:Biscuits (KFC-Style)": {
+    "output": "assets/images/recipes/biscuits-kfc-style.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Buttermilk_biscuits_(6340812760).jpg",
+    "file": "Buttermilk biscuits (6340812760).jpg",
+    "author": "jeffreyw",
+    "licence": "CC BY 2.0",
+    "spdx": "CC-BY-2.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+    "bundled": false
+  },
+  "recipe:Black Cake": {
+    "output": "assets/images/recipes/black-cake.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Trinidad_and_Tobago-style_black_cake.jpg",
+    "file": "Trinidad and Tobago-style black cake.jpg",
+    "author": "Guettarda",
+    "licence": "CC BY-SA 4.0",
+    "spdx": "CC-BY-SA-4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "bundled": false
+  },
+  "recipe:Cake Mix": {
+    "output": "assets/images/recipes/cake-mix.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Sponge_cake.jpg",
+    "file": "Sponge cake.jpg",
+    "author": "Stu Spivack",
+    "licence": "CC BY-SA 2.0",
+    "spdx": "CC-BY-SA-2.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "bundled": false
+  },
+  "recipe:Carrot Juice": {
+    "output": "assets/images/recipes/carrot-juice.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Carrot_juice_-_July_2023_-_Sarah_Stierch.jpg",
+    "file": "Carrot juice - July 2023 - Sarah Stierch.jpg",
+    "author": "Missvain",
+    "licence": "CC BY 4.0",
+    "spdx": "CC-BY-4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0",
+    "bundled": false
+  },
+  "recipe:Chicken Bolognese": {
+    "output": "assets/images/recipes/chicken-bolognese.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Spaghetti_Bolognese_-_Figaros,_Brighton_2023-10-06.jpg",
+    "file": "Spaghetti Bolognese - Figaros, Brighton 2023-10-06.jpg",
+    "author": "Andy Li",
+    "licence": "CC0",
+    "spdx": "CC0-1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "bundled": false
+  },
+  "recipe:Chunks": {
+    "output": "assets/images/recipes/chunks.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Nutrela_Soya_Chunks_Curry.jpg",
+    "file": "Nutrela Soya Chunks Curry.jpg",
+    "author": "Rashmi Biswas",
+    "licence": "CC BY-SA 4.0",
+    "spdx": "CC-BY-SA-4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "bundled": false
+  },
+  "recipe:Coleslaw": {
+    "output": "assets/images/recipes/coleslaw.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Coleslaw_at_Charlies.jpg",
+    "file": "Coleslaw at Charlies.jpg",
+    "author": "Stanistani",
+    "licence": "CC BY-SA 3.0",
+    "spdx": "CC-BY-SA-3.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "bundled": false
+  },
+  "recipe:Corn Pie": {
+    "output": "assets/images/recipes/corn-pie.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Cheesy_Bean_and_Corn_Casserole.jpg",
+    "file": "Cheesy Bean and Corn Casserole.jpg",
+    "author": "Robert Loescher",
+    "licence": "CC BY-SA 4.0",
+    "spdx": "CC-BY-SA-4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "bundled": false
+  },
+  "recipe:Corned Beef": {
+    "output": "assets/images/recipes/corned-beef.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:1320Stir_fry_corn_beef_tenderloin_05.jpg",
+    "file": "1320Stir fry corn beef tenderloin 05.jpg",
+    "author": "Judgefloro",
+    "licence": "CC0",
+    "spdx": "CC0-1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "bundled": false
+  },
+  "recipe:Curry Chicken": {
+    "output": "assets/images/recipes/curry-chicken.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Curriedchickencaribfood.jpg",
+    "file": "Curriedchickencaribfood.jpg",
+    "author": "Connie Ma",
+    "licence": "CC BY-SA 2.0",
+    "spdx": "CC-BY-SA-2.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "bundled": false
+  },
+  "recipe:Curry Goat": {
+    "output": "assets/images/recipes/curry-goat.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Curry_Goat_and_Rice.jpg",
+    "file": "Curry Goat and Rice.jpg",
+    "author": "Leon Brocard from London, UK",
+    "licence": "CC BY 2.0",
+    "spdx": "CC-BY-2.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+    "bundled": false
+  },
+  "recipe:Curry Potatoes": {
+    "output": "assets/images/recipes/curry-potatoes.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Potato_curry_(4356270962).jpg",
+    "file": "Potato curry (4356270962).jpg",
+    "author": "pelican from Tokyo, Japan",
+    "licence": "CC BY-SA 2.0",
+    "spdx": "CC-BY-SA-2.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "bundled": false
+  },
+  "recipe:Dumpling": {
+    "output": "assets/images/recipes/dumpling.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Fr%C3%A4nkische_Mehlkl%C3%B6%C3%9Fe_mit_Gurkensalat.jpg",
+    "file": "Fränkische Mehlklöße mit Gurkensalat.jpg",
+    "author": "Benreis",
+    "licence": "CC BY-SA 4.0",
+    "spdx": "CC-BY-SA-4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "bundled": false
+  },
+  "recipe:Egg Fried Rice": {
+    "output": "assets/images/recipes/egg-fried-rice.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Egg_Fried_Rice.jpg",
+    "file": "Egg Fried Rice.jpg",
+    "author": "Gaurav Dhwaj Khadka",
+    "licence": "CC BY-SA 4.0",
+    "spdx": "CC-BY-SA-4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "bundled": false
+  },
+  "recipe:French Toast": {
+    "output": "assets/images/recipes/french-toast.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:French_toast_001.jpg",
+    "file": "French toast 001.jpg",
+    "author": "Ocdp",
+    "licence": "CC0",
+    "spdx": "CC0-1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "bundled": false
+  },
+  "recipe:Gammon": {
+    "output": "assets/images/recipes/gammon.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Honey-glazed_ham.jpg",
+    "file": "Honey-glazed ham.jpg",
+    "author": "Daniel Hanson from Phoenix AZ, USA",
+    "licence": "CC BY 2.0",
+    "spdx": "CC-BY-2.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+    "bundled": false
+  },
+  "recipe:Garlic Bread": {
+    "output": "assets/images/recipes/garlic-bread.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Garlic_bread_-_on_plate,_ready_to_eat.jpg",
+    "file": "Garlic bread - on plate, ready to eat.jpg",
+    "author": "Infrogmation of New Orleans",
+    "licence": "CC BY-SA 2.0",
+    "spdx": "CC-BY-SA-2.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "bundled": false
+  },
+  "recipe:Ginger Beer": {
+    "output": "assets/images/recipes/ginger-beer.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Korfiotisches_Ingwerbier_01.jpg",
+    "file": "Korfiotisches Ingwerbier 01.jpg",
+    "author": "Kritzolina",
+    "licence": "CC BY-SA 4.0",
+    "spdx": "CC-BY-SA-4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "bundled": false
+  },
+  "recipe:Jacket Potatoes": {
+    "output": "assets/images/recipes/jacket-potatoes.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Baked_Beans_&_Mature_Cheddar_Jacket_-_Jonny's_2026-06-12.jpg",
+    "file": "Baked Beans & Mature Cheddar Jacket - Jonny's 2026-06-12.jpg",
+    "author": "Andy Li",
+    "licence": "CC0",
+    "spdx": "CC0-1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "bundled": false
+  },
+  "recipe:Pancake": {
+    "output": "assets/images/recipes/pancake.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Blueberry_pancakes_with_maple_syrup_(9583713785).jpg",
+    "file": "Blueberry pancakes with maple syrup (9583713785).jpg",
+    "author": "Ruth Hartnup from Vancouver, Canada",
+    "licence": "CC BY 2.0",
+    "spdx": "CC-BY-2.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+    "bundled": false
+  },
+  "recipe:Pizza": {
+    "output": "assets/images/recipes/pizza.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Margherita_Originale.JPG",
+    "file": "Margherita Originale.JPG",
+    "author": "Mario56",
+    "licence": "CC BY-SA 3.0",
+    "spdx": "CC-BY-SA-3.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "bundled": false
+  },
+  "recipe:Plain Cake": {
+    "output": "assets/images/recipes/plain-cake.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Vanilla_yogurt_pound_cake_(43128425162).jpg",
+    "file": "Vanilla yogurt pound cake (43128425162).jpg",
+    "author": "Joey Doll",
+    "licence": "CC BY 2.0",
+    "spdx": "CC-BY-2.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+    "bundled": false
+  },
+  "recipe:Baked Plantain": {
+    "output": "assets/images/recipes/baked-plantain.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Baked_Plantains_(3510854117).jpg",
+    "file": "Baked Plantains (3510854117).jpg",
+    "author": "Rennett Stowe from USA",
+    "licence": "CC BY 2.0",
+    "spdx": "CC-BY-2.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+    "bundled": false
+  },
+  "recipe:Pork Belly": {
+    "output": "assets/images/recipes/pork-belly.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Honey_Glazed_Pork_Belly_Bites_@_Maid_of_Auckland,_Edwardstown_20250314-122907.jpg",
+    "file": "Honey Glazed Pork Belly Bites @ Maid of Auckland, Edwardstown 20250314-122907.jpg",
+    "author": "RegionVisitor90",
+    "licence": "CC0",
+    "spdx": "CC0-1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "bundled": false
+  },
+  "recipe:Potato Salad": {
+    "output": "assets/images/recipes/potato-salad.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Potato_salad_001.jpg",
+    "file": "Potato salad 001.jpg",
+    "author": "Ocdp",
+    "licence": "CC0",
+    "spdx": "CC0-1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "bundled": false
+  },
+  "recipe:Spinach Rice": {
+    "output": "assets/images/recipes/spinach-rice.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Peas_and_Palak_Rice.jpg",
+    "file": "Peas and Palak Rice.jpg",
+    "author": "Krishnasri.somepalli",
+    "licence": "CC BY-SA 4.0",
+    "spdx": "CC-BY-SA-4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "bundled": false
+  },
+  "recipe:Rice With Kidney Beans": {
+    "output": "assets/images/recipes/rice-with-kidney-beans.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Jamaican_rice_and_peas_1.jpg",
+    "file": "Jamaican rice and peas 1.jpg",
+    "author": "Xaymacan",
+    "licence": "CC BY-SA 4.0",
+    "spdx": "CC-BY-SA-4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "bundled": false
+  },
+  "recipe:Roast Potatoes": {
+    "output": "assets/images/recipes/roast-potatoes.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Roasted_potatoes_in_bowl.jpg",
+    "file": "Roasted potatoes in bowl.jpg",
+    "author": "Punker1999",
+    "licence": "CC0",
+    "spdx": "CC0-1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "bundled": false
+  },
+  "recipe:Roast Sweet Potatoes": {
+    "output": "assets/images/recipes/roast-sweet-potatoes.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Roasted_Sweet_Potato.jpg",
+    "file": "Roasted Sweet Potato.jpg",
+    "author": "Nizil Shah",
+    "licence": "CC BY-SA 4.0",
+    "spdx": "CC-BY-SA-4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "bundled": false
+  },
+  "recipe:Roast Vegetables": {
+    "output": "assets/images/recipes/roast-vegetables.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Roasted_Vegetables_(2897937502).jpg",
+    "file": "Roasted Vegetables (2897937502).jpg",
+    "author": "Mack Male from Edmonton, AB, Canada",
+    "licence": "CC BY-SA 2.0",
+    "spdx": "CC-BY-SA-2.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "bundled": false
+  },
+  "recipe:Buss-Up Shot Roti": {
+    "output": "assets/images/recipes/buss-up-shot-roti.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Paratharoti.jpg",
+    "file": "Paratharoti.jpg",
+    "author": "stu spivack",
+    "licence": "CC BY-SA 2.0",
+    "spdx": "CC-BY-SA-2.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "bundled": false
+  },
+  "recipe:Plain Roti": {
+    "output": "assets/images/recipes/plain-roti.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Roti_Paratha.jpg",
+    "file": "Roti Paratha.jpg",
+    "author": "Gaurav Dhwaj Khadka",
+    "licence": "CC BY-SA 4.0",
+    "spdx": "CC-BY-SA-4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "bundled": false
+  },
+  "recipe:Salmon": {
+    "output": "assets/images/recipes/salmon.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Baked_salmon_with_dill_and_lemon.jpg",
+    "file": "Baked salmon with dill and lemon.jpg",
+    "author": "MOs810",
+    "licence": "CC BY-SA 3.0",
+    "spdx": "CC-BY-SA-3.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "bundled": false
+  },
+  "recipe:Salt Fish": {
+    "output": "assets/images/recipes/salt-fish.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Ackee_and_Saltfish.jpg",
+    "file": "Ackee and Saltfish.jpg",
+    "author": "gailf548 from New York State, USA",
+    "licence": "CC BY 2.0",
+    "spdx": "CC-BY-2.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+    "bundled": false
+  },
+  "recipe:Salt Fish Cake": {
+    "output": "assets/images/recipes/salt-fish-cake.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Stamp_and_go_(Jamaican_saltfish_fritters).jpg",
+    "file": "Stamp and go (Jamaican saltfish fritters).jpg",
+    "author": "Xaymacan",
+    "licence": "CC BY-SA 4.0",
+    "spdx": "CC-BY-SA-4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "bundled": false
+  },
+  "recipe:Sardine": {
+    "output": "assets/images/recipes/sardine.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Canned_sardines_with_lemon.jpg",
+    "file": "Canned sardines with lemon.jpg",
+    "author": "Pannet",
+    "licence": "CC BY-SA 4.0",
+    "spdx": "CC-BY-SA-4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "bundled": false
+  },
+  "recipe:Sauce": {
+    "output": "assets/images/recipes/sauce.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Fresh_Tomato_Sauce_(Unsplash).jpg",
+    "file": "Fresh Tomato Sauce (Unsplash).jpg",
+    "author": "Dennis Klein klein2",
+    "licence": "CC0",
+    "spdx": "CC0-1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "bundled": false
+  },
+  "recipe:White Sauce": {
+    "output": "assets/images/recipes/white-sauce.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:B%C3%A9chamel_in_saucepan.jpg",
+    "file": "Béchamel in saucepan.jpg",
+    "author": "Saintfevrier",
+    "licence": "CC BY-SA 3.0",
+    "spdx": "CC-BY-SA-3.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "bundled": false
+  },
+  "recipe:Season Chicken": {
+    "output": "assets/images/recipes/season-chicken.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:(202502)_Raw_marinated_chicken_01.jpg",
+    "file": "(202502) Raw marinated chicken 01.jpg",
+    "author": "Roy Zuo",
+    "licence": "CC BY-SA 4.0",
+    "spdx": "CC-BY-SA-4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "bundled": false
+  },
+  "recipe:Seasoning": {
+    "output": "assets/images/recipes/seasoning.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:FOOD_Green_Seasoning_Supermarket.jpg",
+    "file": "FOOD Green Seasoning Supermarket.jpg",
+    "author": "Grueslayer",
+    "licence": "CC BY-SA 4.0",
+    "spdx": "CC-BY-SA-4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "bundled": false
+  },
+  "recipe:Soup": {
+    "output": "assets/images/recipes/soup.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Jamaican_chicken_soup.jpg",
+    "file": "Jamaican chicken soup.jpg",
+    "author": "Xaymacan",
+    "licence": "CC BY-SA 4.0",
+    "spdx": "CC-BY-SA-4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "bundled": false
+  },
+  "recipe:Callaloo Soup": {
+    "output": "assets/images/recipes/callaloo-soup.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Callaloo.jpg",
+    "file": "Callaloo.jpg",
+    "author": "Shivonne Du Barry",
+    "licence": "CC BY 2.0",
+    "spdx": "CC-BY-2.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+    "bundled": false
+  },
+  "recipe:Gammon Soup": {
+    "output": "assets/images/recipes/gammon-soup.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Ham_&_butter_bean_soup_(105310901).jpg",
+    "file": "Ham & butter bean soup (105310901).jpg",
+    "author": "Andy / Andrew Fogg from near Cambridge, UK",
+    "licence": "CC BY 2.0",
+    "spdx": "CC-BY-2.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+    "bundled": false
+  },
+  "recipe:Lentil Soup": {
+    "output": "assets/images/recipes/lentil-soup.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Homemade_Lentil_Soup_-_Lavash_2025-02-10.jpg",
+    "file": "Homemade Lentil Soup - Lavash 2025-02-10.jpg",
+    "author": "Andy Li",
+    "licence": "CC0",
+    "spdx": "CC0-1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "bundled": false
+  },
+  "recipe:Spinach": {
+    "output": "assets/images/recipes/spinach.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Sauteed_spinach_and_tomatoes_(41368303650).jpg",
+    "file": "Sauteed spinach and tomatoes (41368303650).jpg",
+    "author": "Joey Doll",
+    "licence": "CC BY 2.0",
+    "spdx": "CC-BY-2.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+    "bundled": false
+  },
+  "recipe:Stew Chicken": {
+    "output": "assets/images/recipes/stew-chicken.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Brown_Stew_Chicken_at_Island_Taste.jpg",
+    "file": "Brown Stew Chicken at Island Taste.jpg",
+    "author": "Andre Carrotflower",
+    "licence": "CC BY-SA 4.0",
+    "spdx": "CC-BY-SA-4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "bundled": false
+  },
+  "recipe:Taco Pasta": {
+    "output": "assets/images/recipes/taco-pasta.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:8.28.12CheeseburgerMacByLuigiNovi2.jpg",
+    "file": "8.28.12CheeseburgerMacByLuigiNovi2.jpg",
+    "author": "Nightscream",
+    "licence": "CC BY 3.0",
+    "spdx": "CC-BY-3.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/3.0",
+    "bundled": false
+  },
+  "recipe:Tuna": {
+    "output": "assets/images/recipes/tuna.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Tuna_Salad_with_sweet_corn.jpg",
+    "file": "Tuna Salad with sweet corn.jpg",
+    "author": "Adesolive",
+    "licence": "CC0",
+    "spdx": "CC0-1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "bundled": false
+  },
+  "recipe:Guinness": {
+    "output": "assets/images/recipes/guinness.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Guinness_Milkshake_at_25_Degrees.jpg",
+    "file": "Guinness Milkshake at 25 Degrees.jpg",
+    "author": "Lauren Bosak from San Francisco, United States",
+    "licence": "CC BY-SA 2.0",
+    "spdx": "CC-BY-SA-2.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "bundled": false
+  },
+  "recipe:Sorrel Juice": {
+    "output": "assets/images/recipes/sorrel-juice.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Homemade_sorrel_drink.jpg",
+    "file": "Homemade sorrel drink.jpg",
+    "author": "Stu Spivack",
+    "licence": "CC BY-SA 2.0",
+    "spdx": "CC-BY-SA-2.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "bundled": false
+  },
+  "meal:Bakes & Fish Fingers": {
+    "output": "assets/images/meals/bakes-and-fish-fingers.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Bake_and_Shark_with_hot_sauce_and_cabbage_Natalie%27s_famous_Bake_and_Shark_Maracas_Bay_Trinidad.jpg",
+    "file": "Bake and Shark with hot sauce and cabbage Natalie's famous Bake and Shark Maracas Bay Trinidad.jpg",
+    "author": "amanderson2",
+    "licence": "CC BY 2.0",
+    "spdx": "CC-BY-2.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+    "bundled": false
+  },
+  "meal:Bakes & Fried Chicken": {
+    "output": "assets/images/meals/bakes-and-fried-chicken.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:North_Carolina_Style_Southern_Fried_Chicken_Biscuit_Sandwich.jpg",
+    "file": "North Carolina Style Southern Fried Chicken Biscuit Sandwich.jpg",
+    "author": "CalebJay",
+    "licence": "CC BY-SA 4.0",
+    "spdx": "CC-BY-SA-4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "bundled": false
+  },
+  "meal:Banana Fritters": {
+    "output": "assets/images/meals/banana-fritters.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Banana_fritters_(10886918023).jpg",
+    "file": "Banana fritters (10886918023).jpg",
+    "author": "Karen and Brad Emerson",
+    "licence": "CC BY 2.0",
+    "spdx": "CC-BY-2.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+    "bundled": false
+  },
+  "meal:Beef & Vegetable Soup with Garlic Bread": {
+    "output": "assets/images/meals/beef-and-vegetable-soup-with-garlic-bread.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Mmm..._vegetable_beef_soup_with_oven_fresh_rolls_(7639323188)_(2).jpg",
+    "file": "Mmm... vegetable beef soup with oven fresh rolls (7639323188) (2).jpg",
+    "author": "jeffreyw",
+    "licence": "CC BY 2.0",
+    "spdx": "CC-BY-2.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+    "bundled": false
+  },
+  "meal:Beef Lasagne & Breaded Fish Fillet": {
+    "output": "assets/images/meals/beef-lasagne-and-breaded-fish-fillet.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Beef_Lasagna_-_The_Mad_Hatter.jpg",
+    "file": "Beef Lasagna - The Mad Hatter.jpg",
+    "author": "Andy Li",
+    "licence": "CC0",
+    "spdx": "CC0-1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "bundled": false
+  },
+  "meal:Breaded Fish & Macaroni with Baked Beans": {
+    "output": "assets/images/meals/breaded-fish-and-macaroni-with-baked-beans.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Fried_Catfish_%26_Baked_Macaroni_-_Rocky_%26_Carlo%27s.jpg",
+    "file": "Fried Catfish & Baked Macaroni - Rocky & Carlo's.jpg",
+    "author": "Jason Lam",
+    "licence": "CC BY-SA 2.0",
+    "spdx": "CC-BY-SA-2.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "bundled": false
+  },
+  "meal:Cottage Pie with Fried Chicken & Vegetable Rice": {
+    "output": "assets/images/meals/cottage-pie-with-fried-chicken-and-vegetable-rice.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Shepherds_pie_-_The_Kew_Greenhouse_Cafe_2025-05-14.jpg",
+    "file": "Shepherds pie - The Kew Greenhouse Cafe 2025-05-14.jpg",
+    "author": "Andy Li",
+    "licence": "CC0",
+    "spdx": "CC0-1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "bundled": false
+  },
+  "meal:Jacket Potatoes & Chicken Bolognese": {
+    "output": "assets/images/meals/jacket-potatoes-and-chicken-bolognese.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Jacket_potato_with_meatballs_tomato_sauce_and_cheese_and_butter_-_Potatoast_2026-05-02.jpg",
+    "file": "Jacket potato with meatballs tomato sauce and cheese and butter - Potatoast 2026-05-02.jpg",
+    "author": "Andy Li",
+    "licence": "CC0",
+    "spdx": "CC0-1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "bundled": false
+  },
+  "meal:Jacket Potatoes with Baked Beans, Cheese & Coleslaw": {
+    "output": "assets/images/meals/jacket-potatoes-with-baked-beans-cheese-and-coleslaw.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Baked_potato_with_baked_beans_and_cheese_-_The_Verandah_2026-08-25.jpg",
+    "file": "Baked potato with baked beans and cheese - The Verandah 2026-08-25.jpg",
+    "author": "Andy Li",
+    "licence": "CC0",
+    "spdx": "CC0-1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "bundled": false
+  },
+  "meal:Meatballs, Vegetable Rice & Macaroni Salad": {
+    "output": "assets/images/meals/meatballs-vegetable-rice-and-macaroni-salad.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Alb%C3%B3ndigas_con_Arroz_(Susy).jpg",
+    "file": "Albóndigas con Arroz (Susy).jpg",
+    "author": "Tamorlan",
+    "licence": "CC BY 3.0",
+    "spdx": "CC-BY-3.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/3.0",
+    "bundled": false
+  },
+  "meal:Roast Potatoes, Corn Pie, Fish Fingers & Breaded Chicken": {
+    "output": "assets/images/meals/roast-potatoes-corn-pie-fish-fingers-and-breaded-chicken.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Sunday_Dinner_30th_December_2018_-_Roast_chicken,_roast_potatoes,_cauliflower_cheese_%26_peas_with_gravy_(and_a_chunk_of_sausage)_(32671198388).jpg",
+    "file": "Sunday Dinner 30th December 2018 - Roast chicken, roast potatoes, cauliflower cheese & peas with gravy (and a chunk of sausage) (32671198388).jpg",
+    "author": "CharmaineZoe's Marvelous Melange from England",
+    "licence": "CC BY 2.0",
+    "spdx": "CC-BY-2.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+    "bundled": false
+  },
+  "meal:Roti & Stew Chicken": {
+    "output": "assets/images/meals/roti-and-stew-chicken.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Dhalpuri_roti,_curry_chicken,_aloo_and_channa_from_Hi-Way_Roti_Shop_Nelson_Rd,_Freeport_Trinidad.jpg",
+    "file": "Dhalpuri roti, curry chicken, aloo and channa from Hi-Way Roti Shop Nelson Rd, Freeport Trinidad.jpg",
+    "author": "AFRICAN TIGRESS",
+    "licence": "CC BY 3.0",
+    "spdx": "CC-BY-3.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/3.0",
+    "bundled": false
+  },
+  "meal:Spinach (Cream Styled) with Boiled Corn, Sweat Plantain & Sweat Ground Provisions": {
+    "output": "assets/images/meals/spinach-cream-styled-with-boiled-corn-sweat-plantain-and-sweat-ground-provisions.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Boiled_plantain_with_spinach_stew_and_pea.jpg",
+    "file": "Boiled plantain with spinach stew and pea.jpg",
+    "author": "Edithobayaa1",
+    "licence": "CC BY-SA 4.0",
+    "spdx": "CC-BY-SA-4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "bundled": false
   }
 }

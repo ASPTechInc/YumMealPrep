@@ -17,6 +17,11 @@ To change a photo, edit its entry (source and file from the Commons page,
 author, licence and spdx), then run both commands. An optional "crop" of
 [left, top, right, bottom] fractions overrides the centred 4:3 crop.
 
+Photos marked "bundled": false are not part of the app. They reach people
+inside a backup file instead (see docs/backup-format.md), so they are not
+downloaded and need no REUSE entry, but they are still credited because the
+app shows them once that backup is imported.
+
 Requirements: python3 and Pillow (pip install pillow).
 """
 import io
@@ -66,6 +71,8 @@ def credits(manifest):
         "",
     ]
     for key, photo in sorted(manifest.items()):
+        if not photo.get("bundled", True):
+            continue
         path = Path(photo["output"]).relative_to("assets/images").as_posix()
         reuse += [
             "[[annotations]]",
@@ -97,6 +104,8 @@ def download(manifest):
     with tempfile.TemporaryDirectory() as temp:
         sources = Path(temp)
         for key, photo in manifest.items():
+            if not photo.get("bundled", True):
+                continue
             query = urllib.parse.urlencode({
                 "action": "query", "format": "json", "prop": "imageinfo",
                 "iiprop": "url", "iiurlwidth": 4000 if "crop" in photo else 1600,

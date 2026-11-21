@@ -1,9 +1,16 @@
+// Dart imports:
 import 'dart:convert';
 
+// Flutter imports:
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
+
+// Package imports:
 import 'package:sembast/sembast.dart';
 
+// Project imports:
 import 'package:yummealprep/data/app_database.dart';
+import 'package:yummealprep/data/choice_list_repository.dart';
 import 'package:yummealprep/data/image_references.dart';
 import 'package:yummealprep/models/meal.dart';
 import 'package:yummealprep/models/planned_meal.dart';
@@ -40,17 +47,23 @@ class BackupSummary {
 
 /// Exports everything to a single JSON file and restores it again.
 ///
-/// Pictures saved by the app are embedded in the file, so a backup can be
-/// moved to another device on its own. Backups are plain, documented JSON
-/// (see `docs/backup-format.md`) so your data is never locked in.
+/// Pictures saved by the app and the bundled pictures items use are embedded
+/// in the file, so a backup can be moved to another device, or to a copy of
+/// the app without those bundled pictures, on its own. Backups are plain,
+/// documented JSON (see `docs/backup-format.md`) so your data is never locked
+/// in.
 class BackupService {
-  BackupService(this.database, this.images);
+  BackupService(this.database, this.images, {AssetBundle? bundle})
+    : bundle = bundle ?? rootBundle;
 
   static const String format = 'yummealprep-backup';
   static const int version = 1;
 
   final AppDatabase database;
   final ImageStore images;
+
+  /// Where bundled pictures are read from.
+  final AssetBundle bundle;
 
   Future<Uint8List> export({DateTime? now}) async {
     final db = database.db;
@@ -61,8 +74,9 @@ class BackupService {
     final embedded = <String, String>{};
     Future<void> embed(Iterable<String> sources) async {
       for (final source in sources) {
-        if (!images.owns(source) || embedded.containsKey(source)) continue;
-        final bytes = await images.readBytes(source);
+        if (embedded.containsKey(source)) continue;
+        if (!images.owns(source) && !ImageStore.isAsset(source)) continue;
+        final bytes = await images.load(source, bundle: bundle);
         if (bytes != null) embedded[source] = base64Encode(bytes);
       }
     }
@@ -78,9 +92,11 @@ class BackupService {
       'format': format,
       'version': version,
       'exportedAt': (now ?? DateTime.now()).toUtc().toIso8601String(),
-      'meals': {for (final record in meals) record.key: record.value},
-      'recipes': {for (final record in recipes) record.key: record.value},
-      'mealPlan': {for (final record in plan) record.key: record.value},
+      'meals': [for (final record in meals) _withId(record)],
+      'recipes': [for (final record in recipes) _withId(record)],
+      'mealPlan': [for (final record in plan) _withId(record)],
+      for (final list in ChoiceList.values)
+        list.name: await ChoiceListRepository(database, list).getAll(),
       'images': embedded,
     };
     return utf8.encode(const JsonEncoder.withIndent('  ').convert(backup));
@@ -109,12 +125,17 @@ class BackupService {
       );
     }
     return BackupContents(
-      meals: _records(json['meals']),
-      recipes: _records(json['recipes']),
-      mealPlan: _records(json['mealPlan']),
+      meals: _records(json['meals'], 'meals'),
+      recipes: _records(json['recipes'], 'recipes'),
+      mealPlan: _records(json['mealPlan'], 'mealPlan'),
       images: {
         for (final entry in _map(json['images']).entries)
           if (entry.value is String) entry.key: entry.value! as String,
+      },
+      choices: {
+        for (final list in ChoiceList.values)
+          if (json[list.name] is List)
+            list: (json[list.name]! as List).whereType<String>().toList(),
       },
       sampleDataVersion: _readInt(json['sampleDataVersion']),
     );
@@ -158,8 +179,15 @@ class BackupService {
     final renamed = <String, String>{};
     for (final entry in contents.images.entries) {
       try {
+        final bytes = base64Decode(entry.value);
+        // Bundled pictures are embedded for copies of the app that do not
+        // have them. Where this copy has the picture, keep using it.
+        if (ImageStore.isAsset(entry.key) &&
+            await images.load(entry.key, bundle: bundle) != null) {
+          continue;
+        }
         renamed[entry.key] = await images.save(
-          base64Decode(entry.value),
+          bytes,
           extension: entry.key.split('.').last,
         );
       } on FormatException {
@@ -223,6 +251,12 @@ class BackupService {
             .record(recipe.id)
             .put(transaction, recipe.toMap());
       }
+      await _restoreChoices(
+        transaction,
+        contents.choices,
+        ChoiceList.usedBy(meals, recipes),
+        replaceAll: replaceAll,
+      );
       for (final entry in plan) {
         final mealExists =
             mealIds.contains(entry.mealId) ||
@@ -247,6 +281,27 @@ class BackupService {
     );
   }
 
+  /// Brings in the backup's side dish and drink lists. Replacing everything
+  /// takes the file's lists as they are (a file without them, made before
+  /// they existed, leaves the current ones); otherwise the names are added.
+  /// Either way, names the imported items use are added so none go missing.
+  Future<void> _restoreChoices(
+    Transaction transaction,
+    Map<ChoiceList, List<String>> fromFile,
+    Map<ChoiceList, List<String>> used, {
+    required bool replaceAll,
+  }) async {
+    for (final list in ChoiceList.values) {
+      final choices = ChoiceListRepository(database, list);
+      final names = fromFile[list];
+      if (replaceAll && names != null) {
+        await choices.replace([...names, ...?used[list]], transaction);
+      } else {
+        await choices.add([...?names, ...?used[list]], transaction);
+      }
+    }
+  }
+
   /// Keeps bundled assets, inline pictures and pictures already on this
   /// device; drops references to files that are missing.
   String? _keepIfUsable(String source, Set<String> available) =>
@@ -258,10 +313,41 @@ class BackupService {
 
   static int _readInt(Object? value) => value is num ? value.toInt() : 0;
 
-  static Map<String, Map<String, Object?>> _records(Object? value) => {
-    for (final entry in _map(value).entries)
-      if (entry.value is Map) entry.key: _map(entry.value),
-  };
+  /// A record as written to a backup: its id first, then its fields.
+  static Map<String, Object?> _withId(
+    RecordSnapshot<String, Map<String, Object?>> record,
+  ) => {'id': record.key, ...record.value};
+
+  /// Reads a list of records, each carrying its own `id`, keyed by that id.
+  /// A record without an id, or with an id already used in the same list,
+  /// makes the whole file invalid rather than silently dropping data.
+  static Map<String, Map<String, Object?>> _records(
+    Object? value,
+    String name,
+  ) {
+    if (value == null) return const {};
+    if (value is! List) {
+      throw BackupFormatException('"$name" must be a list of items.');
+    }
+    final records = <String, Map<String, Object?>>{};
+    for (final item in value.whereType<Map>()) {
+      final fields = Map<String, Object?>.of(_map(item));
+      final id = fields.remove('id');
+      if (id is! String || id.trim().isEmpty) {
+        throw BackupFormatException(
+          'An item in "$name" has no id. Every item needs an "id".',
+        );
+      }
+      if (records.containsKey(id)) {
+        throw BackupFormatException(
+          'The id "$id" is used more than once in "$name". '
+          'Each item needs its own id.',
+        );
+      }
+      records[id] = fields;
+    }
+    return records;
+  }
 
   static Map<String, Object?> _map(Object? value) =>
       value is Map ? value.cast<String, Object?>() : const {};
@@ -275,6 +361,7 @@ class BackupContents {
     required this.recipes,
     required this.mealPlan,
     required this.images,
+    this.choices = const {},
     this.sampleDataVersion = 0,
   });
 
@@ -284,6 +371,10 @@ class BackupContents {
 
   /// Embedded pictures: image source to base64-encoded bytes.
   final Map<String, String> images;
+
+  /// The side dish and drink lists. A list the file does not have is
+  /// missing, rather than empty.
+  final Map<ChoiceList, List<String>> choices;
 
   /// Set in the bundled sample data, so new samples can be added later.
   final int sampleDataVersion;

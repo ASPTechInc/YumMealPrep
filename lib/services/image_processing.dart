@@ -1,4 +1,7 @@
+// Flutter imports:
 import 'package:flutter/foundation.dart';
+
+// Package imports:
 import 'package:image/image.dart' as img;
 
 /// A picture ready to be stored.

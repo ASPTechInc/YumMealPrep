@@ -1,5 +1,7 @@
+// Package imports:
 import 'package:sembast/sembast.dart';
 
+// Project imports:
 import 'package:yummealprep/data/app_database.dart';
 import 'package:yummealprep/data/image_references.dart';
 import 'package:yummealprep/models/catalogue_item.dart';

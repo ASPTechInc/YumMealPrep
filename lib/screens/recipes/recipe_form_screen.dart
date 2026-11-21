@@ -1,8 +1,11 @@
+// Dart imports:
 import 'dart:async';
 
+// Flutter imports:
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+// Project imports:
 import 'package:yummealprep/app_services.dart';
 import 'package:yummealprep/models/meal_type.dart';
 import 'package:yummealprep/models/recipe.dart';
@@ -171,7 +174,15 @@ class _RecipeFormScreenState extends State<RecipeFormScreen> {
           key: _formKey,
           onChanged: _changed,
           child: ListView(
-            padding: const EdgeInsets.all(16),
+            // Explicit padding replaces the system inset ListView would add
+            // on its own, so add it back to keep the last field clear of
+            // the navigation bar.
+            padding: EdgeInsets.fromLTRB(
+              16,
+              16,
+              16,
+              16 + MediaQuery.paddingOf(context).bottom,
+            ),
             children: [
               ImageField(
                 source: _image,

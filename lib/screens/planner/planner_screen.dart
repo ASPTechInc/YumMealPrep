@@ -1,9 +1,16 @@
+// Dart imports:
 import 'dart:async';
 
+// Flutter imports:
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
+
+// Package imports:
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+// Project imports:
 import 'package:yummealprep/app_services.dart';
 import 'package:yummealprep/data/meal_plan_repository.dart';
 import 'package:yummealprep/models/meal.dart';
@@ -40,6 +47,14 @@ class _PlannerScreenState extends State<PlannerScreen> {
   // Entries swiped away but not yet gone from the database stream. A
   // dismissed row has to leave the list straight away.
   final Set<String> _removing = {};
+
+  // While a day's meals are held and dragged across the calendar to copy
+  // them, the day they came from and the day under the finger.
+  DateTime? _dragFrom;
+  DateTime? _dragTo;
+
+  // The calendar's day cells on screen, to find the day under the finger.
+  final Set<_RenderDayCell> _dayCells = {};
 
   AppServices get _services => AppScope.of(context);
 
@@ -119,6 +134,93 @@ class _PlannerScreenState extends State<PlannerScreen> {
       );
   }
 
+  void _startDrag(DateTime pressed, DateTime focused) {
+    final day = dateOnly(pressed);
+    if (_entriesFor(day).isEmpty) {
+      showMessage(
+        context,
+        'Plan a meal on this day first, then hold and drag it across '
+        'the calendar to copy it to the days after.',
+      );
+      return;
+    }
+    unawaited(HapticFeedback.mediumImpact());
+    setState(() {
+      _selectedDay = day;
+      _focusedDay = focused;
+      _dragFrom = day;
+      _dragTo = day;
+    });
+  }
+
+  void _dragOver(PointerMoveEvent event) {
+    final day = _dayAt(event.position);
+    if (day == null || day == _dragTo) return;
+    unawaited(HapticFeedback.selectionClick());
+    setState(() => _dragTo = day);
+  }
+
+  DateTime? _dayAt(Offset position) {
+    for (final cell in _dayCells) {
+      if (!cell.hasSize) continue;
+      if (cell.size.contains(cell.globalToLocal(position))) return cell.day;
+    }
+    return null;
+  }
+
+  /// The days a drag would copy to: neither the day the meals came from nor
+  /// a day that cannot be planned.
+  List<DateTime> _dragTargets() {
+    final from = _dragFrom;
+    final to = _dragTo;
+    if (from == null || to == null) return const [];
+    final last = lastPlannableDay(_today);
+    return [
+      for (final day in daysBetween(from, to))
+        if (day != from && isTodayOrLater(day) && !day.isAfter(last)) day,
+    ];
+  }
+
+  Future<void> _endDrag() async {
+    final from = _dragFrom;
+    final days = _dragTargets();
+    setState(() {
+      _dragFrom = null;
+      _dragTo = null;
+    });
+    if (from == null || days.isEmpty) return;
+    final copies = copyToDays(_entriesFor(from), days, _plan);
+    if (copies.isEmpty) {
+      showMessage(context, 'Those days already have these meals.');
+      return;
+    }
+    await _services.mealPlan.addAll(copies);
+    if (!mounted) return;
+    final meals = copies.map((copy) => copy.mealId).toSet().length;
+    final dayCount = copies.map((copy) => copy.date).toSet().length;
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(
+          content: Text(
+            '${meals == 1 ? 'Meal' : '$meals meals'} copied to '
+            '${dayCount == 1 ? '1 day' : '$dayCount days'}',
+          ),
+          action: SnackBarAction(
+            label: 'Undo',
+            onPressed: () => unawaited(
+              _services.mealPlan.removeAll(copies.map((copy) => copy.id)),
+            ),
+          ),
+        ),
+      );
+  }
+
+  void _cancelDrag() => setState(() {
+    _dragFrom = null;
+    _dragTo = null;
+  });
+
   void _goToToday() => setState(() {
     _selectedDay = _today;
     _focusedDay = _today;
@@ -128,6 +230,8 @@ class _PlannerScreenState extends State<PlannerScreen> {
   Widget build(BuildContext context) {
     final colours = Theme.of(context).colorScheme;
     final entries = _entriesFor(_selectedDay);
+    final dragFrom = _dragFrom;
+    final dragTargets = _dragTargets().toSet();
     return Scaffold(
       drawer: const AppDrawer(),
       appBar: AppBar(
@@ -150,50 +254,83 @@ class _PlannerScreenState extends State<PlannerScreen> {
       ),
       body: Column(
         children: [
-          TableCalendar<PlannedMeal>(
-            firstDay: DateTime(_today.year - 1, _today.month),
-            lastDay: lastPlannableDay(_today),
-            focusedDay: _focusedDay,
-            currentDay: _today,
-            calendarFormat: _format,
-            startingDayOfWeek: StartingDayOfWeek.monday,
-            availableCalendarFormats: const {
-              CalendarFormat.month: 'Month',
-              CalendarFormat.twoWeeks: '2 weeks',
-              CalendarFormat.week: 'Week',
-            },
-            selectedDayPredicate: (day) => isSameDay(day, _selectedDay),
-            eventLoader: _entriesFor,
-            onDaySelected: (selected, focused) => setState(() {
-              _selectedDay = dateOnly(selected);
-              _focusedDay = focused;
-            }),
-            onFormatChanged: (format) => setState(() => _format = format),
-            onPageChanged: (focused) => _focusedDay = focused,
-            headerStyle: HeaderStyle(
-              // Label the button with the current view, not the next one.
-              formatButtonShowsNext: false,
-              formatButtonDecoration: BoxDecoration(
-                border: Border.all(color: colours.outline),
-                borderRadius: BorderRadius.circular(16),
+          // Holding a day starts the drag through onDayLongPressed. The
+          // calendar's long press then owns the pointer, so its page swipes
+          // stay still, and this listener follows the finger.
+          Listener(
+            onPointerMove: dragFrom == null ? null : _dragOver,
+            onPointerUp: dragFrom == null ? null : (_) => _endDrag(),
+            onPointerCancel: dragFrom == null ? null : (_) => _cancelDrag(),
+            child: TableCalendar<PlannedMeal>(
+              firstDay: DateTime(_today.year - 1, _today.month),
+              lastDay: lastPlannableDay(_today),
+              focusedDay: _focusedDay,
+              currentDay: _today,
+              calendarFormat: _format,
+              startingDayOfWeek: StartingDayOfWeek.monday,
+              availableCalendarFormats: const {
+                CalendarFormat.month: 'Month',
+                CalendarFormat.twoWeeks: '2 weeks',
+                CalendarFormat.week: 'Week',
+              },
+              selectedDayPredicate: (day) => isSameDay(day, _selectedDay),
+              eventLoader: _entriesFor,
+              onDaySelected: (selected, focused) => setState(() {
+                _selectedDay = dateOnly(selected);
+                _focusedDay = focused;
+              }),
+              onDayLongPressed: _startDrag,
+              onFormatChanged: (format) => setState(() => _format = format),
+              onPageChanged: (focused) => _focusedDay = focused,
+              headerStyle: HeaderStyle(
+                // Label the button with the current view, not the next one.
+                formatButtonShowsNext: false,
+                formatButtonDecoration: BoxDecoration(
+                  border: Border.all(color: colours.outline),
+                  borderRadius: BorderRadius.circular(16),
+                ),
               ),
-            ),
-            calendarStyle: CalendarStyle(
-              outsideDaysVisible: false,
-              todayDecoration: BoxDecoration(
-                color: colours.primaryContainer,
-                shape: BoxShape.circle,
+              calendarStyle: CalendarStyle(
+                outsideDaysVisible: false,
+                todayDecoration: BoxDecoration(
+                  color: colours.primaryContainer,
+                  shape: BoxShape.circle,
+                ),
+                todayTextStyle: TextStyle(color: colours.onPrimaryContainer),
+                selectedDecoration: BoxDecoration(
+                  color: colours.primary,
+                  shape: BoxShape.circle,
+                ),
+                selectedTextStyle: TextStyle(color: colours.onPrimary),
               ),
-              todayTextStyle: TextStyle(color: colours.onPrimaryContainer),
-              selectedDecoration: BoxDecoration(
-                color: colours.primary,
-                shape: BoxShape.circle,
+              calendarBuilders: CalendarBuilders(
+                markerBuilder: (context, day, events) =>
+                    events.isEmpty ? null : _DayMarkers(entries: events),
+                // Called for every day cell, so it also tags each cell with
+                // its day for _dayAt. Ranges are not used otherwise.
+                rangeHighlightBuilder: (context, day, _) {
+                  final date = dateOnly(day);
+                  final highlighted =
+                      date == dragFrom || dragTargets.contains(date);
+                  return Positioned.fill(
+                    child: _DayCell(
+                      day: date,
+                      cells: _dayCells,
+                      child: highlighted
+                          ? Container(
+                              margin: const EdgeInsets.all(2),
+                              decoration: BoxDecoration(
+                                color: date == dragFrom
+                                    ? colours.primaryContainer
+                                    : colours.secondaryContainer,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            )
+                          : null,
+                    ),
+                  );
+                },
               ),
-              selectedTextStyle: TextStyle(color: colours.onPrimary),
-            ),
-            calendarBuilders: CalendarBuilders(
-              markerBuilder: (context, day, events) =>
-                  events.isEmpty ? null : _DayMarkers(entries: events),
             ),
           ),
           const Divider(height: 1),
@@ -246,6 +383,42 @@ class _PlannerScreenState extends State<PlannerScreen> {
         ],
       ),
     );
+  }
+}
+
+/// Marks a calendar cell with its [day], for finding the day under a drag.
+class _DayCell extends SingleChildRenderObjectWidget {
+  const _DayCell({required this.day, required this.cells, super.child});
+
+  final DateTime day;
+  final Set<_RenderDayCell> cells;
+
+  @override
+  _RenderDayCell createRenderObject(BuildContext context) =>
+      _RenderDayCell(day, cells);
+
+  @override
+  void updateRenderObject(BuildContext context, _RenderDayCell renderObject) {
+    renderObject.day = day;
+  }
+}
+
+class _RenderDayCell extends RenderProxyBox {
+  _RenderDayCell(this.day, this._cells);
+
+  DateTime day;
+  final Set<_RenderDayCell> _cells;
+
+  @override
+  void attach(PipelineOwner owner) {
+    super.attach(owner);
+    _cells.add(this);
+  }
+
+  @override
+  void detach() {
+    _cells.remove(this);
+    super.detach();
   }
 }
 

@@ -1,3 +1,4 @@
+// Package imports:
 import 'package:sembast/sembast_memory.dart';
 
 import 'package:yummealprep/data/database_opener_io.dart'
@@ -16,6 +17,10 @@ class AppDatabase {
   static final RecordStore recipes = stringMapStoreFactory.store('recipes');
   static final RecordStore mealPlan = stringMapStoreFactory.store('meal_plan');
   static final StoreRef<String, Object?> settings = StoreRef('settings');
+
+  /// The side dish and drink names offered in the meal form, one list per
+  /// record (see `ChoiceListRepository`).
+  static final StoreRef<String, Object?> choices = StoreRef('choices');
 
   final Database db;
 

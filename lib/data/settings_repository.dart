@@ -1,6 +1,10 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:sembast/sembast.dart';
 
+// Project imports:
 import 'package:yummealprep/data/app_database.dart';
 
 /// App preferences, kept in the same local database as everything else.

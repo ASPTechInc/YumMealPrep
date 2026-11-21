@@ -1,5 +1,7 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
 
+// Project imports:
 import 'package:yummealprep/models/catalogue_item.dart';
 import 'package:yummealprep/widgets/item_image.dart';
 
@@ -48,7 +50,13 @@ class DetailLayout extends StatelessWidget {
           ),
         ),
         SliverPadding(
-          padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
+          // Keeps the end of the page above the navigation bar.
+          padding: EdgeInsets.fromLTRB(
+            16,
+            16,
+            16,
+            32 + MediaQuery.paddingOf(context).bottom,
+          ),
           sliver: SliverList.list(
             children: [
               Text(item.name, style: theme.textTheme.headlineSmall),

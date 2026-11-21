@@ -108,11 +108,12 @@ pre-commit install
 The sample data in [assets/data/seed.json](assets/data/seed.json) is added the first time the app
 runs, so new users can see how the app works. Keep it small: at most two meals and two recipes.
 People add their own with the **Add meal** and **Add recipe** buttons, or with **Import data**.
-The file is an ordinary backup in the [documented format](docs/backup-format.md). Each meal
-looks like this:
+The file is an ordinary backup in the [documented format](docs/backup-format.md). Each meal is
+one entry in the `meals` list and looks like this:
 
 ```json
-"EydGfAfwAR7vHM3yXmJ4": {
+{
+  "id": "EydGfAfwAR7vHM3yXmJ4",
   "name": "Fish & Chips",
   "type": "lunch",
   "description": "Fish and chips is a hot dish consisting of fried fish in batter...",
@@ -128,18 +129,26 @@ Recipes have `ingredients`, `instructions` (in order), `preparationMinutes`, `co
 `servings` and `isSideDish` instead of the drink and side dishes.
 
 - `type` is one of `appetisers`, `breakfast`, `lunch`, `dinner`, `dessert` or `smoothies`.
-- Ids must be unique and should not change once released.
+- Ids must be unique within `meals`, `recipes` or `mealPlan` and should not change once released.
+  A file with a missing or repeated id is rejected.
 - Search works on the text itself, so there is no keyword list to maintain.
 - The sample data is added once per `sampleDataVersion`. To give existing users new items,
   increase it; items people have deleted are not added back.
+- The top-level `sideDishes` and `drinks` lists are what the meal form offers on a new install.
+  People change them in the app with **Manage side dishes** and **Manage drinks**, and backups
+  carry them. Recipes with `isSideDish` set, and the side dishes and drinks meals use, are added
+  to the lists automatically, so they do not need repeating here.
 
 `test/data/sample_data_test.dart` checks the file, including that every photo exists and is
 credited.
 
 ### Photos
 
-The photos for the full original catalogue (see `scripts/convert-firestore-export.py`) are
-bundled, so an imported `.backup` from that catalogue shows its pictures. Every food photo is freely licensed (CC0, public domain, CC BY or CC BY-SA) and listed in
+Only the sample data's photos are bundled with the app. The photos for the rest of the catalogue
+are not kept in the project: they travel inside the `.backup` file with the meals and recipes, and
+importing it saves them on the device. Their manifest entries are marked `"bundled": false`, so
+the scripts skip them but still credit them. Every food photo is freely licensed (CC0, public
+domain, CC BY or CC BY-SA) and listed in
 [scripts/photo-sources.json](scripts/photo-sources.json) with its source, author and licence. To add
 or change one:
 
@@ -151,6 +160,18 @@ or change one:
    under **Photo credits**) and `assets/images/REUSE.toml`.
 4. Check with `pipx run reuse lint`. If the photo uses a new licence, add its text with
    `pipx run reuse download <SPDX id>`.
+
+To change a photo that travels in a backup, use `scripts/replace-backup-photo.py`. It crops and
+converts the picture the same way and writes it into the `.backup` file:
+
+```bash
+scripts/replace-backup-photo.py path/to/file.backup "Curry Goat" ~/Downloads/curry-goat.png
+```
+
+Keep a copy of the backup first, as it holds the only copy of those photos. Add `--meal` or
+`--recipe` when a meal and a recipe share a name, and `--crop` if the centred crop cuts off the
+food. Then update the photo's entry in the manifest and run `scripts/fetch-photos.py credits`
+(step 3) so the credits stay right. Run the script with no arguments for all its options.
 
 ---
 

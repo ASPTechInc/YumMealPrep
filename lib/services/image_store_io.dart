@@ -1,11 +1,16 @@
+// Dart imports:
 import 'dart:io';
 
-import 'package:crypto/crypto.dart';
+// Flutter imports:
 import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
+
+// Package imports:
+import 'package:crypto/crypto.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
+// Project imports:
 import 'package:yummealprep/services/image_store.dart';
 
 Future<ImageStore> openImageStore() async {

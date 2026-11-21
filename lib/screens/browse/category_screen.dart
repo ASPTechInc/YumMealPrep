@@ -1,5 +1,7 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
 
+// Project imports:
 import 'package:yummealprep/models/meal_type.dart';
 import 'package:yummealprep/screens/browse/browse_screen.dart';
 import 'package:yummealprep/screens/navigation.dart';

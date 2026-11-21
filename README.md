@@ -82,7 +82,7 @@ offline and never downloads pictures, so to give items pictures, list a file pat
 address) as the `image` and let `scripts/pack-backup.py` embed them:
 
 ```json
-{"meals": {"curry-goat": {"name": "Curry Goat", "type": "dinner", "image": "photos/curry-goat.jpg"}}}
+{"meals": [{"id": "curry-goat", "name": "Curry Goat", "type": "dinner", "image": "photos/curry-goat.jpg"}]}
 ```
 
 ```bash
@@ -119,4 +119,4 @@ every file is recorded with [REUSE](https://reuse.software/) in [REUSE.toml](REU
 
 - [ASPTechnologies Incorporation](https://github.com/ASPTechInc)
 
-See also [other FOSS projects](docs/foss-projects.md) by the developer.
+See also [other FOSS projects](docs/foss-projects.md) by the developer and [notes](docs/developer-notes.md) used during development.

@@ -12,7 +12,8 @@ import 'package:yummealprep/models/recipe.dart';
 import 'support.dart';
 
 /// Takes the store screenshots in fastlane/metadata/android/en-GB/images/
-/// phoneScreenshots/, using a set of everyday dishes and the bundled photos.
+/// phoneScreenshots/, using a set of everyday dishes and the bundled photos
+/// (see `_addDemoData`).
 ///
 /// Run on a phone emulator:
 ///   `flutter drive --driver=test_driver/integration_test.dart`
@@ -40,7 +41,7 @@ void main() {
 
     await tester.tap(find.text('Lunch'));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('Pelau'));
+    await tester.tap(find.text('Fried Shrimp, Rice & Beans'));
     await shot(tester, '3');
     await tester.pageBack();
     await tester.pumpAndSettle();
@@ -78,13 +79,15 @@ void main() {
   });
 }
 
-/// Everyday dishes for the screenshots, using the bundled photos.
+/// Everyday dishes for the screenshots. Most catalogue photos are not
+/// bundled (they come in a backup), so these use only the pictures that
+/// always ship with the app: the category photos and the sample data's.
 Future<void> _addDemoData(AppServices services) async {
   Meal meal(
     String id,
     String name,
     MealType type,
-    String photo,
+    String image,
     String drink, [
     List<String> sides = const [],
   ]) => Meal(
@@ -93,106 +96,120 @@ Future<void> _addDemoData(AppServices services) async {
     type: type,
     drink: drink,
     sideDishes: sides,
-    image: 'assets/images/meals/$photo.webp',
+    image: 'assets/images/$image.webp',
     description: _descriptions[name] ?? '',
   );
   final meals = [
     meal(
-      'demo-french-toast',
-      'French Toast',
+      'demo-eggs-on-toast',
+      'Eggs on Toast',
       MealType.breakfast,
-      'french-toast',
+      'categories/breakfast',
       'Chocolate Tea',
     ),
-    meal('demo-pelau', 'Pelau', MealType.lunch, 'pelau', 'Sorrel', [
-      'Coleslaw',
-    ]),
-    meal('demo-pizza', 'Pizza', MealType.dinner, 'pizza', 'Water'),
     meal(
-      'demo-roti',
-      'Roti & Curry Chicken',
+      'demo-shrimp',
+      'Fried Shrimp, Rice & Beans',
       MealType.lunch,
-      'roti-and-curry-chicken',
+      'categories/lunch',
+      'Sorrel',
+      ['Tossed Salad'],
+    ),
+    meal(
+      'demo-roast-chicken',
+      'Roast Chicken Dinner',
+      MealType.dinner,
+      'categories/dinner',
+      'Water',
+      ['Roast Potatoes', 'Coleslaw'],
+    ),
+    meal(
+      'demo-lasagne',
+      'Beef Lasagne',
+      MealType.dinner,
+      'recipes/lasagne',
+      'Juice',
+      ['Garlic Bread'],
+    ),
+    meal(
+      'demo-platter',
+      'Fried Chicken Platter',
+      MealType.appetisers,
+      'categories/appetisers',
       'Mauby',
     ),
     meal(
-      'demo-callaloo',
-      'Callaloo Soup',
-      MealType.lunch,
-      'callaloo-soup',
-      'Juice',
+      'demo-chocolate-cake',
+      'Chocolate Cake',
+      MealType.dessert,
+      'categories/dessert',
+      'Milk',
     ),
     meal(
-      'demo-macaroni-pie',
-      'Macaroni Pie & Fried Chicken',
-      MealType.lunch,
-      'macaroni-pie-and-fried-chicken',
-      'Juice',
-      ['Coleslaw'],
-    ),
-    meal('demo-chowmein', 'Chowmein', MealType.dinner, 'chowmein', 'Juice'),
-    meal(
-      'demo-pumpkin-soup',
-      'Pumpkin Soup',
-      MealType.dinner,
-      'pumpkin-soup',
-      'Ginger Tea',
+      'demo-smoothies',
+      'Berry & Green Smoothies',
+      MealType.smoothies,
+      'categories/smoothies',
+      '',
     ),
   ];
   for (final item in meals) {
     await services.meals.save(item);
   }
-  await services.meals.setFavourite('demo-pelau', favourite: true);
+  await services.meals.setFavourite('demo-shrimp', favourite: true);
 
   await services.recipes.save(
     const Recipe(
-      id: 'demo-jerk-chicken',
-      name: 'Jerk Chicken',
-      type: MealType.dinner,
+      id: 'demo-chocolate-cake',
+      name: 'Chocolate Cake',
+      type: MealType.dessert,
       description:
-          'Chicken marinated in a hot, spicy jerk seasoning, then '
-          'grilled slowly until smoky and tender.',
+          'Layers of moist chocolate sponge and cream, finished with '
+          'cocoa and a drizzle of chocolate sauce.',
       ingredients: [
-        'Chicken thighs',
-        'Jerk seasoning',
-        'Scotch bonnet pepper',
-        'Thyme',
-        'Lime',
+        'Flour',
+        'Cocoa powder',
+        'Sugar',
+        'Eggs',
+        'Butter',
+        'Double cream',
       ],
       instructions: [
-        'Season the chicken and leave it overnight.',
-        'Grill over a medium heat, turning often, for about an hour.',
+        'Bake the sponge and leave it to cool.',
+        'Slice it into layers and fill with whipped cream.',
+        'Dust with cocoa and drizzle with chocolate sauce.',
       ],
-      preparationMinutes: 15,
-      cookingMinutes: 60,
-      servings: 6,
-      image: 'assets/images/recipes/jerk-chicken.webp',
+      preparationMinutes: 30,
+      cookingMinutes: 35,
+      servings: 8,
+      image: 'assets/images/categories/dessert.webp',
     ),
   );
 
   final today = DateTime.now();
   DateTime day(int offset) =>
       DateTime(today.year, today.month, today.day + offset);
+  // Fish & Chips and Pancake & Scrambled Eggs come from the sample data.
   for (final (offset, id, slot) in [
-    (0, 'demo-french-toast', MealType.breakfast),
-    (0, 'demo-pelau', MealType.lunch),
-    (0, 'demo-pizza', MealType.dinner),
-    (1, 'demo-roti', MealType.lunch),
-    (1, 'demo-chowmein', MealType.dinner),
-    (2, 'demo-callaloo', MealType.lunch),
-    (3, 'demo-macaroni-pie', MealType.lunch),
-    (3, 'demo-pumpkin-soup', MealType.dinner),
+    (0, 'demo-eggs-on-toast', MealType.breakfast),
+    (0, 'demo-shrimp', MealType.lunch),
+    (0, 'demo-roast-chicken', MealType.dinner),
+    (1, 'i9T9zZ2nxAN7gfz2iSLE', MealType.breakfast),
+    (1, 'EydGfAfwAR7vHM3yXmJ4', MealType.lunch),
+    (1, 'demo-lasagne', MealType.dinner),
+    (2, 'demo-platter', MealType.appetisers),
+    (2, 'demo-chocolate-cake', MealType.dessert),
   ]) {
     await services.mealPlan.add(mealId: id, date: day(offset), slot: slot);
   }
 }
 
 const _descriptions = {
-  'Pelau':
-      'Rice cooked with chicken, pigeon peas and vegetables, with the '
-      'meat first browned in sugar. A one-pot Caribbean favourite.',
-  'French Toast':
-      'Bread soaked in beaten egg, milk and cinnamon, then '
-      'fried until golden.',
-  'Pizza': 'A thin crust topped with tomato sauce, mozzarella and basil.',
+  'Fried Shrimp, Rice & Beans':
+      'Crispy fried shrimp on lettuce and tomato, with yellow rice and '
+      'black beans on the side.',
+  'Roast Chicken Dinner':
+      'A whole roast chicken with all the trimmings, made for sharing '
+      'round the table.',
+  'Eggs on Toast': 'Fried eggs on buttered toast, ready in minutes.',
 };

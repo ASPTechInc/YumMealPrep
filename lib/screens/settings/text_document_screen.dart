@@ -1,8 +1,12 @@
+// Dart imports:
 import 'dart:async';
 
+// Flutter imports:
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+// Package imports:
 import 'package:url_launcher/url_launcher.dart';
 
 /// Shows a bundled text or Markdown document, such as the privacy policy.

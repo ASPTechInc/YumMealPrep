@@ -1,5 +1,7 @@
+// Package imports:
 import 'package:flutter_test/flutter_test.dart';
 
+// Project imports:
 import 'package:yummealprep/utils/dates.dart';
 import 'package:yummealprep/utils/ids.dart';
 import 'package:yummealprep/utils/search.dart';
@@ -68,6 +70,19 @@ void main() {
       expect(isTodayOrLater(DateTime(2026, 10, 28), now: now), isTrue);
       expect(isTodayOrLater(DateTime(2026, 11, 2), now: now), isTrue);
       expect(isTodayOrLater(DateTime(2026, 10, 27, 23), now: now), isFalse);
+    });
+
+    test('daysBetween includes both ends, in either order', () {
+      final days = [
+        DateTime(2026, 10, 30),
+        DateTime(2026, 10, 31),
+        DateTime(2026, 11),
+      ];
+      expect(daysBetween(DateTime(2026, 10, 30, 9), DateTime(2026, 11)), days);
+      expect(daysBetween(DateTime(2026, 11), DateTime(2026, 10, 30)), days);
+      expect(daysBetween(DateTime(2026, 11), DateTime(2026, 11)), [
+        DateTime(2026, 11),
+      ]);
     });
   });
 

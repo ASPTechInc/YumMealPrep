@@ -1,8 +1,13 @@
+// Dart imports:
 import 'dart:io';
 
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:flutter_test/flutter_test.dart';
 
+// Project imports:
 import 'package:yummealprep/app.dart';
 import 'package:yummealprep/app_services.dart';
 import 'package:yummealprep/data/sample_data.dart';

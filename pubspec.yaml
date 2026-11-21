@@ -25,7 +25,7 @@ dependencies:
   path_provider: ^2.1.6
   pdf: ^3.13.1
   printing: ^5.15.1
-  sembast: ^3.9.0
+  sembast: ^3.10.1
   sembast_web: ^2.4.6+1
   table_calendar: ^3.3.0
   url_launcher: ^6.3.3

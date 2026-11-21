@@ -262,7 +262,7 @@ class _PlannerScreenState extends State<PlannerScreen> {
             onPointerUp: dragFrom == null ? null : (_) => _endDrag(),
             onPointerCancel: dragFrom == null ? null : (_) => _cancelDrag(),
             child: TableCalendar<PlannedMeal>(
-              firstDay: DateTime(_today.year - 1, _today.month),
+              firstDay: firstPlannerDay(_today),
               lastDay: lastPlannableDay(_today),
               focusedDay: _focusedDay,
               currentDay: _today,

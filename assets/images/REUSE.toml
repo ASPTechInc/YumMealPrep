@@ -33,6 +33,12 @@ SPDX-FileCopyrightText = "FranHogan"
 SPDX-License-Identifier = "CC-BY-SA-4.0"
 
 [[annotations]]
+path = "categories/remedies.webp"
+precedence = "closest"
+SPDX-FileCopyrightText = "Dominik Martin"
+SPDX-License-Identifier = "CC0-1.0"
+
+[[annotations]]
 path = "categories/smoothies.webp"
 precedence = "closest"
 SPDX-FileCopyrightText = "GEOlaviva"

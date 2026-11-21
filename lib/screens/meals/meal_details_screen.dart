@@ -10,6 +10,7 @@ import 'package:intl/intl.dart';
 // Project imports:
 import 'package:yummealprep/app_services.dart';
 import 'package:yummealprep/models/meal.dart';
+import 'package:yummealprep/models/recipe.dart';
 import 'package:yummealprep/screens/navigation.dart';
 import 'package:yummealprep/screens/share/pdf_share_screen.dart';
 import 'package:yummealprep/services/pdf_documents.dart';
@@ -33,6 +34,18 @@ class MealDetailsScreen extends StatefulWidget {
 class _MealDetailsScreenState extends State<MealDetailsScreen> {
   late final AppServices _services = AppScope.of(context);
   late final Stream<Meal?> _meal = _services.meals.watch(widget.mealId);
+  late final Stream<List<Recipe>> _recipes = _services.recipes.watchAll();
+
+  /// Opens a linked recipe, if it has not been deleted in the meantime.
+  Future<void> _openRecipe(String recipeId) async {
+    final recipe = await _services.recipes.get(recipeId);
+    if (!mounted) return;
+    if (recipe == null) {
+      showMessage(context, 'This recipe has been deleted.');
+      return;
+    }
+    await openRecipe(context, recipeId);
+  }
 
   Future<void> _addToPlan(Meal meal) async {
     final today = dateOnly(DateTime.now());
@@ -176,6 +189,21 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
                 const SectionHeading('Description'),
                 Text(meal.description),
               ],
+              StreamBuilder<List<Recipe>>(
+                stream: _recipes,
+                builder: (context, snapshot) {
+                  // Only recipes that still exist, in the meal's order.
+                  final byId = {
+                    for (final recipe in snapshot.data ?? const <Recipe>[])
+                      recipe.id: recipe,
+                  };
+                  return LinkedItems(
+                    title: 'Recipes',
+                    items: [for (final id in meal.recipeIds) ?byId[id]],
+                    onOpen: (recipe) => _openRecipe(recipe.id),
+                  );
+                },
+              ),
               if (meal.nutritionFactImages.isNotEmpty) ...[
                 const SectionHeading('Nutrition facts'),
                 SizedBox(

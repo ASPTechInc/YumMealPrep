@@ -65,6 +65,25 @@ void main() {
       expect(lastPlannableDay(DateTime(2026, 10, 28)), DateTime(2028, 10, 28));
     });
 
+    test('firstPlannerDay keeps this week at the top of a fortnight', () {
+      // Every day for two years, across clock changes and leap days.
+      for (var i = 0; i < 731; i++) {
+        final today = DateTime(2026, 1, 1 + i);
+        final first = firstPlannerDay(today);
+        final monday = DateTime(
+          today.year,
+          today.month,
+          today.day - (today.weekday - 1),
+        );
+        expect(first.weekday, DateTime.monday, reason: '$today');
+        expect(first.hour, 0, reason: '$today');
+        // Whole days, rounded to ignore an hour gained or lost to a clock
+        // change.
+        final days = (monday.difference(first).inHours / 24).round();
+        expect(days, 52 * 7, reason: '$today');
+      }
+    });
+
     test('isTodayOrLater compares whole days', () {
       final now = DateTime(2026, 10, 28, 23, 59);
       expect(isTodayOrLater(DateTime(2026, 10, 28), now: now), isTrue);

@@ -53,6 +53,13 @@ enum MealType {
     description:
         'Drinks made by blending fruit and vegetables with a liquid base '
         'such as juice, milk, yoghurt or ice cream.',
+  ),
+  remedies(
+    label: 'Remedies',
+    colour: AppColours.remedies,
+    icon: Icons.local_hospital,
+    image: '${Constants.categoriesImageDir}remedies.webp',
+    description: 'Natural remedies and health-boosting drinks for well-being.',
   );
 
   const MealType({

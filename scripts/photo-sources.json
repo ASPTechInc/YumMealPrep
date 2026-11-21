@@ -44,6 +44,15 @@
     "spdx": "CC-BY-SA-4.0",
     "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
   },
+  "category:remedies": {
+    "output": "assets/images/categories/remedies.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Limon%26zingiber.jpg",
+    "file": "Limon&zingiber.jpg",
+    "author": "Dominik Martin",
+    "licence": "CC0",
+    "spdx": "CC0-1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+  },
   "category:smoothies": {
     "output": "assets/images/categories/smoothies.webp",
     "source": "https://commons.wikimedia.org/wiki/File:-14.c._-GEOlaviva_-Webbild_-_-Smoothies_-greensmothies_-cleaneating_-rawfood_-Superfood.jpg",

@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 
 // Project imports:
 import 'package:yummealprep/app_services.dart';
+import 'package:yummealprep/models/meal.dart';
 import 'package:yummealprep/models/meal_type.dart';
 import 'package:yummealprep/models/recipe.dart';
 import 'package:yummealprep/utils/ids.dart';
@@ -56,6 +57,12 @@ class _RecipeFormScreenState extends State<RecipeFormScreen> {
   late bool _isSideDish = widget.recipe?.isSideDish ?? false;
   late String? _image = widget.recipe?.image;
 
+  // The meals this recipe is used in. The link is stored on the meals, so
+  // it is read from them once they load.
+  late final StreamSubscription<List<Meal>> _mealsSubscription;
+  List<Meal> _mealChoices = const [];
+  List<String>? _mealIds;
+
   /// Pictures picked while the form is open, deleted again if unused.
   final Set<String> _pickedImages = {};
   bool _hasChanges = false;
@@ -64,7 +71,23 @@ class _RecipeFormScreenState extends State<RecipeFormScreen> {
   bool get _isNew => widget.recipe == null;
 
   @override
+  void initState() {
+    super.initState();
+    _mealsSubscription = AppScope.of(context).meals.watchAll().listen(
+      (meals) => setState(() {
+        _mealChoices = meals;
+        _mealIds ??= [
+          if (widget.recipe case final recipe?)
+            for (final meal in meals)
+              if (meal.recipeIds.contains(recipe.id)) meal.id,
+        ];
+      }),
+    );
+  }
+
+  @override
   void dispose() {
+    unawaited(_mealsSubscription.cancel());
     for (final controller in [
       _name,
       _description,
@@ -126,7 +149,11 @@ class _RecipeFormScreenState extends State<RecipeFormScreen> {
       isFavourite: widget.recipe?.isFavourite ?? false,
     );
     try {
-      await _services.recipes.save(recipe);
+      final mealIds = _mealIds;
+      // If the meals had not loaded yet, leave their links as they are.
+      await (mealIds == null
+          ? _services.recipes.save(recipe)
+          : _services.recipes.saveWithMeals(recipe, mealIds.toSet()));
       _discardPickedImages(keep: recipe.imageSources.toSet());
       if (!mounted) return;
       showMessage(context, _isNew ? 'Recipe added' : 'Recipe saved');
@@ -229,6 +256,17 @@ class _RecipeFormScreenState extends State<RecipeFormScreen> {
                   labelText: 'Description',
                   alignLabelWithHint: true,
                 ),
+              ),
+              const SizedBox(height: 16),
+              LinkedItemsField(
+                label: 'Meals',
+                hint: 'Search meals',
+                items: _mealChoices,
+                selectedIds: _mealIds ?? const [],
+                onChanged: (ids) => setState(() {
+                  _mealIds = ids;
+                  _hasChanges = true;
+                }),
               ),
               const SizedBox(height: 16),
               Row(

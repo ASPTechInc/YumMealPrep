@@ -10,6 +10,7 @@
       "description": "Enjoy this delicious meal",
       "drink": "Juice",
       "sideDishes": [],
+      "recipeIds": [],
       "image": "assets/images/meals/fish-and-chips.webp",
       "nutritionFactImages": [],
       "isFavourite": false
@@ -23,6 +24,7 @@
       "sideDishes": [
         "Toast"
       ],
+      "recipeIds": [],
       "image": "assets/images/meals/pancake-and-scrambled-eggs.webp",
       "nutritionFactImages": [],
       "isFavourite": false

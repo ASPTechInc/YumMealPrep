@@ -76,6 +76,35 @@ void main() {
     });
   });
 
+  group('RecipeRepository', () {
+    const rice = Recipe(id: 'rice', name: 'Rice', type: MealType.lunch);
+    const stew = Recipe(id: 'stew', name: 'Stew', type: MealType.lunch);
+
+    test('saveWithMeals links the recipe to exactly those meals', () async {
+      await services.meals.save(pelau.copyWith(recipeIds: ['stew']));
+      await services.meals.save(oats.copyWith(recipeIds: ['rice']));
+      await services.meals.save(cake);
+
+      await services.recipes.saveWithMeals(rice, {'pelau', 'cake'});
+
+      expect((await services.recipes.get('rice'))?.name, 'Rice');
+      // Added after the meal's other recipes; other links are left alone.
+      expect((await services.meals.get('pelau'))!.recipeIds, ['stew', 'rice']);
+      expect((await services.meals.get('cake'))!.recipeIds, ['rice']);
+      expect((await services.meals.get('oats'))!.recipeIds, isEmpty);
+    });
+
+    test('deleting a recipe takes it off the meals that use it', () async {
+      await services.recipes.save(rice);
+      await services.recipes.save(stew);
+      await services.meals.save(pelau.copyWith(recipeIds: ['rice', 'stew']));
+
+      await services.recipes.delete('rice');
+
+      expect((await services.meals.get('pelau'))!.recipeIds, ['stew']);
+    });
+  });
+
   group('filterItems and countByType', () {
     const meals = [pelau, oats, cake];
 

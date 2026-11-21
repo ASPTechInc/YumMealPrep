@@ -16,6 +16,7 @@ abstract final class AppColours {
   static const Color dinner = Color(0xFF3949AB);
   static const Color dessert = Color(0xFFFB8C00);
   static const Color smoothies = Color(0xFFD81B60);
+  static const Color remedies = Color(0xFF8E24AA);
 }
 
 /// A [Color] built from a hex string such as `#B1A582` or `FFB1A582`.

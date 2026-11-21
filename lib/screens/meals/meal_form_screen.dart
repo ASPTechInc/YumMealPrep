@@ -9,6 +9,7 @@ import 'package:yummealprep/app_services.dart';
 import 'package:yummealprep/data/choice_list_repository.dart';
 import 'package:yummealprep/models/meal.dart';
 import 'package:yummealprep/models/meal_type.dart';
+import 'package:yummealprep/models/recipe.dart';
 import 'package:yummealprep/screens/meals/manage_choices_screen.dart';
 import 'package:yummealprep/utils/ids.dart';
 import 'package:yummealprep/utils/ui.dart';
@@ -32,9 +33,10 @@ class _MealFormScreenState extends State<MealFormScreen> {
   // Subscribed once here rather than in StreamBuilders: the fields sit in a
   // lazy ListView, so scrolling or the keyboard closing rebuilds them, and
   // the database streams can only be listened to once.
-  final List<StreamSubscription<List<String>>> _subscriptions = [];
+  final List<StreamSubscription<Object?>> _subscriptions = [];
   List<String> _drinkChoices = const [];
   List<String> _sideDishChoices = const [];
+  List<Recipe> _recipeChoices = const [];
 
   late final TextEditingController _name = TextEditingController(
     text: widget.meal?.name,
@@ -49,6 +51,7 @@ class _MealFormScreenState extends State<MealFormScreen> {
   late MealType _type =
       widget.meal?.type ?? widget.initialType ?? MealType.lunch;
   late List<String> _sideDishes = [...?widget.meal?.sideDishes];
+  late List<String> _recipeIds = [...?widget.meal?.recipeIds];
   late String? _image = widget.meal?.image;
   late final List<String> _nutritionFacts = [
     ...?widget.meal?.nutritionFactImages,
@@ -71,6 +74,9 @@ class _MealFormScreenState extends State<MealFormScreen> {
       ),
       _services.sideDishes.watch().listen(
         (names) => setState(() => _sideDishChoices = names),
+      ),
+      _services.recipes.watchAll().listen(
+        (recipes) => setState(() => _recipeChoices = recipes),
       ),
     ]);
   }
@@ -143,6 +149,7 @@ class _MealFormScreenState extends State<MealFormScreen> {
       description: _description.text.trim(),
       drink: _drink.text.trim(),
       sideDishes: List.unmodifiable(_sideDishes),
+      recipeIds: List.unmodifiable(_recipeIds),
       image: _image,
       nutritionFactImages: List.unmodifiable(_nutritionFacts),
       isFavourite: widget.meal?.isFavourite ?? false,
@@ -250,6 +257,17 @@ class _MealFormScreenState extends State<MealFormScreen> {
               _ManageButton(
                 label: 'Manage side dishes',
                 onPressed: () => _manage(ChoiceList.sideDishes),
+              ),
+              const SizedBox(height: 16),
+              LinkedItemsField(
+                label: 'Recipes',
+                hint: 'Search recipes',
+                items: _recipeChoices,
+                selectedIds: _recipeIds,
+                onChanged: (ids) => setState(() {
+                  _recipeIds = ids;
+                  _hasChanges = true;
+                }),
               ),
               const SizedBox(height: 24),
               Text(

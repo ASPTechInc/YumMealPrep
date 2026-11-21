@@ -159,3 +159,42 @@ Future<void> showImageViewer(
     ),
   ),
 );
+
+/// The meals or recipes linked to the item on screen, as chips that open
+/// them. Shows nothing when [items] is empty.
+class LinkedItems extends StatelessWidget {
+  const LinkedItems({
+    required this.title,
+    required this.items,
+    required this.onOpen,
+    super.key,
+  });
+
+  final String title;
+  final List<CatalogueItem> items;
+  final ValueChanged<CatalogueItem> onOpen;
+
+  @override
+  Widget build(BuildContext context) {
+    if (items.isEmpty) return const SizedBox.shrink();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SectionHeading(title),
+        Wrap(
+          spacing: 8,
+          runSpacing: 4,
+          children: [
+            for (final item in items)
+              ActionChip(
+                avatar: Icon(item.type.icon, color: item.type.colour),
+                label: Text(item.name),
+                tooltip: 'Open ${item.name}',
+                onPressed: () => onOpen(item),
+              ),
+          ],
+        ),
+      ],
+    );
+  }
+}

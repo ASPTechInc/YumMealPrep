@@ -12,6 +12,18 @@ String dayKey(DateTime date) {
   return '${date.year.toString().padLeft(4, '0')}-$month-$day';
 }
 
+/// The first day the planner's calendar shows: the Monday 52 weeks before
+/// the week of [today].
+///
+/// The calendar's two-week view splits days into fortnights counted from
+/// its first day. Starting a whole number of fortnights before this week
+/// keeps this week as the top row of its page, so today and the week after
+/// it are always on screen together.
+// Calendar arithmetic rather than subtracting a Duration, which can land
+// on the wrong day across a clock change.
+DateTime firstPlannerDay(DateTime today) =>
+    DateTime(today.year, today.month, today.day - (today.weekday - 1) - 52 * 7);
+
 /// The last day meals can be planned for, two years from [today].
 DateTime lastPlannableDay(DateTime today) =>
     DateTime(today.year + 2, today.month, today.day);

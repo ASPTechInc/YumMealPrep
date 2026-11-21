@@ -257,6 +257,46 @@ void main() {
     await services.close();
   });
 
+  test('restores recipe links, and backups made before them', () async {
+    final services = await AppServices.inMemory();
+    final backup = utf8.encode(
+      jsonEncode({
+        'format': 'yummealprep-backup',
+        'version': 1,
+        'meals': [
+          // Made before meals had recipes.
+          {'id': 'old', 'name': 'Pelau', 'type': 'lunch'},
+          {
+            'id': 'new',
+            'name': 'Roti & Curry',
+            'type': 'dinner',
+            'recipeIds': ['curry', 'not-in-file'],
+          },
+        ],
+        'recipes': [
+          {'id': 'curry', 'name': 'Curry Chicken', 'type': 'dinner'},
+        ],
+      }),
+    );
+    await services.backup.restore(backup);
+    expect((await services.meals.get('old'))!.recipeIds, isEmpty);
+    // A link to a recipe that is not here is kept, and simply not shown.
+    expect((await services.meals.get('new'))!.recipeIds, [
+      'curry',
+      'not-in-file',
+    ]);
+
+    final exported =
+        jsonDecode(utf8.decode(await services.backup.export()))
+            as Map<String, Object?>;
+    final meals = (exported['meals']! as List).cast<Map<String, Object?>>();
+    expect(meals.firstWhere((meal) => meal['id'] == 'new')['recipeIds'], [
+      'curry',
+      'not-in-file',
+    ]);
+    await services.close();
+  });
+
   group('FileImageStore', () {
     test('saves pictures under a relative source and deletes them', () async {
       final store = FileImageStore(deviceA);

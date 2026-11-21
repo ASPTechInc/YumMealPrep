@@ -376,7 +376,7 @@ Flutter Upgrades: When you run flutter upgrade, Git inside your Flutter SDK fold
 
 > **Keep it FOSS:** F-Droid does not accept apps that depend on non-free libraries such as Google
 > Play services, Firebase or Google Maps (the planned map view should use `flutter_map` with
-> OpenStreetMap). Run `make foss-audit` (`./scripts/foss_audit.sh`) and `make reuse-lint` before
+> OpenStreetMap). Run `make foss-audit` (`./scripts/foss_audit.sh`) and `make reuse-lint` (install respectively with `pipx install reuse` and then run `pipx run reuse lint`) before
 > each release to check the Dart packages, the Android release classpath and the licensing. The
 > [foss_audit.yml](/.github/workflows/foss_audit.yml) workflow runs the same checks, plus
 > `fdroid lint`, on every push and pull request to `main`.

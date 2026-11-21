@@ -62,6 +62,7 @@ rejected with a message naming the list (and the repeated id), and your data is 
 | `description`         | string          |                                                                        |
 | `drink`               | string          |                                                                        |
 | `sideDishes`          | list of strings |                                                                        |
+| `recipeIds`           | list of strings | The `id`s of the recipes used in this meal. Optional; missing means none. A recipe that is not in the app is ignored. |
 | `image`               | string or null  | An image source (see below).                                           |
 | `nutritionFactImages` | list of strings | Image sources of nutrition label photos.                               |
 | `isFavourite`         | boolean         |                                                                        |

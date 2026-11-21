@@ -103,6 +103,7 @@ below. Each was cropped and resized for the app. Tap a link to see the original.
 - **Potato Salad (recipe)**: [Potato salad 001.jpg](https://commons.wikimedia.org/wiki/File:Potato_salad_001.jpg) by Ocdp, [CC0](https://creativecommons.org/publicdomain/zero/1.0/deed.en)
 - **Pumpkin Soup (meal)**: [Pumpkin soup preparation.jpg](https://commons.wikimedia.org/wiki/File:Pumpkin_soup_preparation.jpg) by MOs810, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0)
 - **Quaker Oats Porridge (meal)**: [Oatmeal porridge with müsli at night.jpg](https://commons.wikimedia.org/wiki/File:Oatmeal_porridge_with_m%C3%BCsli_at_night.jpg) by JIP, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0)
+- **remedies (category)**: [Limon&zingiber.jpg](https://commons.wikimedia.org/wiki/File:Limon%26zingiber.jpg) by Dominik Martin, [CC0](https://creativecommons.org/publicdomain/zero/1.0/deed.en)
 - **Rice With Kidney Beans (recipe)**: [Jamaican rice and peas 1.jpg](https://commons.wikimedia.org/wiki/File:Jamaican_rice_and_peas_1.jpg) by Xaymacan, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0)
 - **Roast Potatoes & Fried Chicken (meal)**: [Halbes Hähnchen Kloß.jpg](https://commons.wikimedia.org/wiki/File:Halbes_H%C3%A4hnchen_Klo%C3%9F.jpg) by Benreis, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0)
 - **Roast Potatoes (recipe)**: [Roasted potatoes in bowl.jpg](https://commons.wikimedia.org/wiki/File:Roasted_potatoes_in_bowl.jpg) by Punker1999, [CC0](https://creativecommons.org/publicdomain/zero/1.0/deed.en)

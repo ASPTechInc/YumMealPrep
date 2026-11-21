@@ -16,6 +16,7 @@ class Meal implements CatalogueItem {
     this.description = '',
     this.drink = '',
     this.sideDishes = const [],
+    this.recipeIds = const [],
     this.image,
     this.nutritionFactImages = const [],
     this.isFavourite = false,
@@ -30,6 +31,7 @@ class Meal implements CatalogueItem {
     description: readString(map['description']),
     drink: readString(map['drink']),
     sideDishes: readStrings(map['sideDishes']),
+    recipeIds: readStrings(map['recipeIds']),
     image: readOptionalString(map['image']),
     nutritionFactImages: readStrings(map['nutritionFactImages']),
     isFavourite: readBool(map['isFavourite']),
@@ -45,6 +47,11 @@ class Meal implements CatalogueItem {
   final String description;
   final String drink;
   final List<String> sideDishes;
+
+  /// The ids of the recipes used to make this meal. A recipe that has been
+  /// deleted, or was not in a restored backup, may still be listed, so look
+  /// each one up before showing it.
+  final List<String> recipeIds;
 
   /// An image source understood by `ItemImage`: a bundled asset path, a
   /// picture saved by the app, or `null` for the placeholder.
@@ -72,6 +79,7 @@ class Meal implements CatalogueItem {
     String? description,
     String? drink,
     List<String>? sideDishes,
+    List<String>? recipeIds,
     String? Function()? image,
     List<String>? nutritionFactImages,
     bool? isFavourite,
@@ -82,6 +90,7 @@ class Meal implements CatalogueItem {
     description: description ?? this.description,
     drink: drink ?? this.drink,
     sideDishes: sideDishes ?? this.sideDishes,
+    recipeIds: recipeIds ?? this.recipeIds,
     image: image != null ? image() : this.image,
     nutritionFactImages: nutritionFactImages ?? this.nutritionFactImages,
     isFavourite: isFavourite ?? this.isFavourite,
@@ -97,6 +106,7 @@ class Meal implements CatalogueItem {
     'description': description,
     'drink': drink,
     'sideDishes': sideDishes,
+    'recipeIds': recipeIds,
     'image': image,
     'nutritionFactImages': nutritionFactImages,
     'isFavourite': isFavourite,
@@ -111,6 +121,7 @@ class Meal implements CatalogueItem {
       other.description == description &&
       other.drink == drink &&
       listEquals(other.sideDishes, sideDishes) &&
+      listEquals(other.recipeIds, recipeIds) &&
       other.image == image &&
       listEquals(other.nutritionFactImages, nutritionFactImages) &&
       other.isFavourite == isFavourite;
@@ -123,6 +134,7 @@ class Meal implements CatalogueItem {
     description,
     drink,
     Object.hashAll(sideDishes),
+    Object.hashAll(recipeIds),
     image,
     Object.hashAll(nutritionFactImages),
     isFavourite,

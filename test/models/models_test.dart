@@ -16,6 +16,7 @@ void main() {
       description: 'Rice cooked with meat and vegetables.',
       drink: 'Sorrel',
       sideDishes: ['Coleslaw'],
+      recipeIds: ['r1', 'r2'],
       image: 'local:images/pelau.jpg',
       nutritionFactImages: ['local:images/label.jpg'],
       isFavourite: true,
@@ -59,6 +60,8 @@ void main() {
     });
     expect(meal.type, MealType.lunch);
     expect(meal.sideDishes, ['Bread']);
+    // Made before meals had recipes.
+    expect(meal.recipeIds, isEmpty);
     expect(meal.isFavourite, isFalse);
     expect(meal.image, isNull);
 

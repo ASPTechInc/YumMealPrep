@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 // Project imports:
 import 'package:yummealprep/app_services.dart';
+import 'package:yummealprep/models/meal.dart';
 import 'package:yummealprep/models/recipe.dart';
 import 'package:yummealprep/screens/navigation.dart';
 import 'package:yummealprep/screens/share/pdf_share_screen.dart';
@@ -25,6 +26,18 @@ class RecipeDetailsScreen extends StatefulWidget {
 class _RecipeDetailsScreenState extends State<RecipeDetailsScreen> {
   late final AppServices _services = AppScope.of(context);
   late final Stream<Recipe?> _recipe = _services.recipes.watch(widget.recipeId);
+  late final Stream<List<Meal>> _meals = _services.meals.watchAll();
+
+  /// Opens a linked meal, if it has not been deleted in the meantime.
+  Future<void> _openMeal(String mealId) async {
+    final meal = await _services.meals.get(mealId);
+    if (!mounted) return;
+    if (meal == null) {
+      showMessage(context, 'This meal has been deleted.');
+      return;
+    }
+    await openMeal(context, mealId);
+  }
 
   // Ingredients ticked off while cooking. Not saved; they reset next time.
   final Set<int> _gathered = {};
@@ -127,6 +140,17 @@ class _RecipeDetailsScreenState extends State<RecipeDetailsScreen> {
                 const SectionHeading('Description'),
                 Text(recipe.description),
               ],
+              StreamBuilder<List<Meal>>(
+                stream: _meals,
+                builder: (context, snapshot) => LinkedItems(
+                  title: 'Used in meals',
+                  items: [
+                    for (final meal in snapshot.data ?? const <Meal>[])
+                      if (meal.recipeIds.contains(recipe.id)) meal,
+                  ],
+                  onOpen: (meal) => _openMeal(meal.id),
+                ),
+              ),
               if (recipe.ingredients.isNotEmpty) ...[
                 const SectionHeading('Ingredients'),
                 for (final (index, ingredient) in recipe.ingredients.indexed)

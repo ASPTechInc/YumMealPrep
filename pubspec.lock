@@ -555,10 +555,10 @@ packages:
     dependency: "direct main"
     description:
       name: sembast_web
-      sha256: "99dad5c3610c7b9559add7f394ab272ccb76a595a28dc94bc40d05c45481c7bf"
+      sha256: "46e3a5512d0e53f5a01d15b0ba199260273de7b00d646d6c7012ef999a5201e2"
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.6+1"
+    version: "2.4.7"
   simple_gesture_detector:
     dependency: transitive
     description:
